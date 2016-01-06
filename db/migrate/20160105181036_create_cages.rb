@@ -3,6 +3,7 @@ class CreateCages < ActiveRecord::Migration
     create_table :cages do |t|
       t.string :name
       t.string :code
+      t.integer :farm_id
 
       t.timestamps null: false
     end

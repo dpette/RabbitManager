@@ -1,3 +1,51 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import "bootstrap-material-design";
+@import "devise_bootstrap_views";
+@import "rails_bootstrap_forms";
+@import "font-awesome";
+@import "palette";
+
+.navbar.navbar, .navbar-default.navbar {
+  background-color: $primary-color;
+}
+
+a, a:hover, a:focus {
+  color: $primary-color-dark;
+}
+
+.btn-primary:not(.btn-link):not(.btn-flat) {
+  background-color: $primary-color;
+}
+
+.btn-primary:hover:not(.btn-link):not(.btn-flat) {
+  background-color: $primary-color-dark;
+}
+
+
+
+
+.navbar {
+  .navbar-brand {
+    padding: 5px;
+    @media (min-width: $screen-sm) {
+    }
+
+    img {
+      height: 40px;
+
+      @media (min-width: $screen-sm) {
+        height: 50px;
+      }
+    }
+  }
+}
+  
+.btn.btn-fab.btn-bottom.btn-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+}
