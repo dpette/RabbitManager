@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  gender: MyString
+  father_id: 1
+  mother_id: 1
+  race: false
+  birth_date: 2016-01-05
+  death_date: 2016-01-05
+
+two:
+  name: MyString
+  gender: MyString
+  father_id: 1
+  mother_id: 1
+  race: false
+  birth_date: 2016-01-05
+  death_date: 2016-01-05
