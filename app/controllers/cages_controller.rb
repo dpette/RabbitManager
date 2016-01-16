@@ -1,6 +1,8 @@
 class CagesController < ApplicationController
   before_action :set_cage, only: [:show, :edit, :update, :destroy]
 
+  before_filter :authenticate_user!#, except: [:index]
+
   # GET /cages
   # GET /cages.json
   def index
@@ -69,6 +71,6 @@ class CagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cage_params
-      params[:cage]
+      params.require(:cage).permit(:name, :code, :farm_id)
     end
 end
