@@ -3,4 +3,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+
+  has_many :farms
+
+  before_save :build_default_farm
+
+  def build_default_farm
+    if self.farms.empty?
+      self.farms.create(name: "default")
+    end
+  end
 end

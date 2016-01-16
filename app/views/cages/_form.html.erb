@@ -1,4 +1,4 @@
-<%= form_for(@cage) do |f| %>
+<%= bootstrap_form_for(@cage) do |f| %>
   <% if @cage.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@cage.errors.count, "error") %> prohibited this cage from being saved:</h2>
@@ -8,8 +8,15 @@
         <li><%= message %></li>
       <% end %>
       </ul>
+
     </div>
   <% end %>
+
+
+  <%= f.text_field :name %>
+  <%= f.text_field :code %>
+  <%= f.select :farm_id, options_for_select %>
+
 
   <div class="actions">
     <%= f.submit %>
