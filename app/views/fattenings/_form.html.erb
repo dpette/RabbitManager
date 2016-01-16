@@ -1,0 +1,17 @@
+<%= form_for(@fattening) do |f| %>
+  <% if @fattening.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fattening.errors.count, "error") %> prohibited this fattening from being saved:</h2>
+
+      <ul>
+      <% @fattening.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

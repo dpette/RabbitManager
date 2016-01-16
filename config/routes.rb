@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :fattenings
   resources :weights
   resources :cages
   resources :compartments

@@ -1,0 +1,2 @@
+module FatteningsHelper
+end
