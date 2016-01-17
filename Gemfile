@@ -59,4 +59,4 @@ gem 'bootstrap_form'
 # bootstrap-material-design provides the Bootstrap-Material-Design web fonts, javascripts and stylesheets as a Rails engine for use with the asset pipeline.
 gem 'bootstrap-material-design'
 # font-awesome-rails provides the Font-Awesome web fonts and stylesheets as a Rails engine for use with the asset pipeline.
-gem "font-awesome-rails"
+# gem "font-awesome-rails"

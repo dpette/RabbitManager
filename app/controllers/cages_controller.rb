@@ -28,6 +28,12 @@ class CagesController < ApplicationController
   def create
     @cage = Cage.new(cage_params)
 
+    if cage_params[:compartment_count].present?
+      (1..cage_params[:compartment_count]).each do |i|
+        @cage.compartments.new(code: i)
+      end
+    end
+
     respond_to do |format|
       if @cage.save
         format.html { redirect_to @cage, notice: 'Cage was successfully created.' }
@@ -71,6 +77,6 @@ class CagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cage_params
-      params.require(:cage).permit(:name, :code, :farm_id)
+      params.require(:cage).permit(:name, :code, :farm_id, :type, :compartment_count)
     end
 end

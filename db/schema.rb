@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106122709) do
+ActiveRecord::Schema.define(version: 20160117002746) do
 
   create_table "cages", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160106122709) do
     t.integer  "farm_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "type"
   end
 
   create_table "compartments", force: :cascade do |t|
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160106122709) do
     t.integer  "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "cage_id"
   end
 
   create_table "farms", force: :cascade do |t|
@@ -54,6 +56,7 @@ ActiveRecord::Schema.define(version: 20160106122709) do
     t.datetime "ending_at"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "cage_id"
   end
 
   create_table "users", force: :cascade do |t|

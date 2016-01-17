@@ -15,10 +15,17 @@
 
   <%= f.text_field :code %>
   <%= f.text_field :name %>
-  <%= f.select :farm_id, options_from_collection_for_select(current_user.farms, :id, :name) %>
+  <% if current_user.farms.size == 1 %>
+    <%= f.hidden_field :farm_id, value: current_user.farms.first.id %>
+  <% else %>
+    <%= f.select :farm_id, options_from_collection_for_select(current_user.farms, :id, :name) %>
+  <% end %>
+  <%= f.select :type, options_for_select(Cage.types.map { |type| [type.type_name, type] }), prompt: "Seleziona il tipo di gabbia" %>
+  <%= render "fattening_cages/fields", f: f %>
 
 
   <div class="actions">
-    <%= f.submit %>
+    <%= link_to "Indietro", cages_path, class: "btn btn-default" %>
+    <%= f.submit "Crea gabbia", class: "btn btn-primary" %>
   </div>
 <% end %>

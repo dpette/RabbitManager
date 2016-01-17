@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   def build_default_farm
     if self.farms.empty?
-      self.farms.create(name: "default")
+      self.farms.new(name: "default")
     end
   end
 end
