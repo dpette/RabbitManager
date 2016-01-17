@@ -6,7 +6,7 @@ class CagesController < ApplicationController
   # GET /cages
   # GET /cages.json
   def index
-    @cages = Cage.all
+    @fattening_cages = current_user.cages.fattening
   end
 
   # GET /cages/1

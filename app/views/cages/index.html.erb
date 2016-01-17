@@ -1,25 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Cages</h1>
+<h1>Gabbie</h1>
 
 
-<div class="list-group">
-  <% @cages.each do |cage| %>
-    <div class="list-group-item">
-      <div class="row-action-primary">
-        <i class="material-icons">folder</i>
-      </div>
-      <div class="row-content">
-        <div class="least-content">15m</div>
-        <h4 class="list-group-item-heading">Tile with a label</h4>
-
-        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
-      </div>
-    </div>
-    <div class="list-group-separator"></div>
-  <% end %>
-</div>
-
+<%= render "fattening_cages/list", cages: @fattening_cages %>
+<%#= render "fattening_cages/list" %>
+<%#= render "fattening_cages/list" %>
+<%#= render "fattening_cages/list" %>
 
 <br>
 
