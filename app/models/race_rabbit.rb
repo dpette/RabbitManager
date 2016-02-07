@@ -1,2 +1,2 @@
-class RaceRabbit < Race
+class RaceRabbit < Rabbit
 end
