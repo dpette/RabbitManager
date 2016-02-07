@@ -1,5 +1,8 @@
 class WeightsController < ApplicationController
   before_action :set_weight, only: [:show, :edit, :update, :destroy]
+  before_action :set_rabbit, only: [:show, :edit, :new, :index, :destroy, :update]
+  before_action :set_cage, only: [:show, :edit, :new, :index, :destroy, :update]
+
 
   # GET /weights
   # GET /weights.json
@@ -14,7 +17,7 @@ class WeightsController < ApplicationController
 
   # GET /weights/new
   def new
-    @weight = Weight.new
+    @weight = @rabbit.weights.new(registered_on: Date.today, value: @rabbit.last_weight)
   end
 
   # GET /weights/1/edit
@@ -25,10 +28,13 @@ class WeightsController < ApplicationController
   # POST /weights.json
   def create
     @weight = Weight.new(weight_params)
+    @rabbit = @weight.rabbit
+    @cage   = @rabbit.cage
 
     respond_to do |format|
       if @weight.save
-        format.html { redirect_to @weight, notice: 'Weight was successfully created.' }
+
+        format.html { redirect_to rabbit_path(@weight.rabbit), notice: 'Weight was successfully created.' }
         format.json { render :show, status: :created, location: @weight }
       else
         format.html { render :new }
@@ -42,7 +48,7 @@ class WeightsController < ApplicationController
   def update
     respond_to do |format|
       if @weight.update(weight_params)
-        format.html { redirect_to @weight, notice: 'Weight was successfully updated.' }
+        format.html { redirect_to rabbit_path(@rabbit), notice: 'Weight was successfully updated.' }
         format.json { render :show, status: :ok, location: @weight }
       else
         format.html { render :edit }
@@ -56,7 +62,7 @@ class WeightsController < ApplicationController
   def destroy
     @weight.destroy
     respond_to do |format|
-      format.html { redirect_to weights_url, notice: 'Weight was successfully destroyed.' }
+      format.html { redirect_to rabbit_path(@rabbit), notice: 'Weight was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,5 +76,18 @@ class WeightsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def weight_params
       params[:weight]
+      params.require(:weight).permit(:rabbit_id, :value, :registered_on)
+    end
+
+    def set_rabbit
+      if @weight
+        @rabbit = @weight.rabbit
+      else
+        @rabbit = Rabbit.find(params[:rabbit_id])
+      end
+    end
+
+    def set_cage
+      @cage = @rabbit.cage
     end
 end

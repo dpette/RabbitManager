@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Motherhood Cages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @motherhood_cages.each do |motherhood_cage| %>
+      <tr>
+        <td><%= link_to 'Show', motherhood_cage %></td>
+        <td><%= link_to 'Edit', edit_motherhood_cage_path(motherhood_cage) %></td>
+        <td><%= link_to 'Destroy', motherhood_cage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Motherhood cage', new_motherhood_cage_path %>

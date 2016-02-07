@@ -5,8 +5,9 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
-  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
 
   <!-- ****** faviconit.com favicons ****** -->
   <%= favicon_link_tag "/assets/favicons/favicon.ico", rel: "shortcut icon" %>
@@ -29,12 +30,18 @@
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="<%= asset_path "/assets/favicons/favicon-144.png" %>">
   <meta name="msapplication-config" content="<%= asset_path "/assets/favicons/browserconfig.xml" %>">
+  <!-- <meta name="theme-color" content="<%= content_for?(:theme_color) ? yield(:theme_color) : "#4CAF50" %>"> -->
+  <!-- <meta name="theme-color" content="black"> -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <!-- ****** faviconit.com favicons ****** -->
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= @cage.try(:model_name).try(:element) %>">
+
 
 <%= render "layouts/navbar" %>
 
@@ -43,7 +50,7 @@
   <%= yield %>
 
   <!-- http://codepen.io/zavoloklom/pen/dIgco -->
-  
+
 </div>
 
 </body>

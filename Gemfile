@@ -60,3 +60,7 @@ gem 'bootstrap_form'
 gem 'bootstrap-material-design'
 # font-awesome-rails provides the Font-Awesome web fonts and stylesheets as a Rails engine for use with the asset pipeline.
 # gem "font-awesome-rails"
+# best practices for rails
+gem "rails_best_practices"
+# This is basically a ruby gem for asset pipeline which includes the version 0.1.6 of the awesome rstacruz' nprogress library.
+gem 'nprogress-rails'

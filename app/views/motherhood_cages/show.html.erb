@@ -1,0 +1,41 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", cages_path %></li>
+<% end %>
+<% content_for :nav_right do  %>
+  <li class="dropdown">
+    <%= icon_link_to "more_vert", "#", class: "dropdown-toggle", data: { toggle: "dropdown" } %>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Modifica", edit_cage_path(@cage) %></li>
+      <li><%= link_to "Elimina", cage_path(@cage), :method => :delete, data: { confirm: "Sicuro di voler eliminare questa Gabbia?" } %></li>
+    </ul>
+  </li>
+<% end %>
+
+<h1>Gabbia <%= @cage.code %></h1>
+<% if @cage.mother %>
+  <h2>Madre</h2>
+  <div class="list-group">
+    <%= link_to rabbit_path(@cage.mother), class: "list-group-item" do %>
+      <div class="row-action-primary row-action-gender-<%= @cage.mother.gender %>">
+        <i class="code">M</i>
+      </div>
+      <div class="row-content">
+        <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+        <!-- <div class="least-content">15m</div> -->
+        <h4 class="list-group-item-heading"><%= pluralize(@cage.mother.age, "giorno", "giorni") %></h4>
+
+        <% if @cage.mother.last_weight.present? %>
+          <p class="list-group-item-text">Ultimo peso <%= @cage.mother.last_weight %></p>
+        <% else %>
+          <p class="list-group-item-text">Nessun peso registrato</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <h2>Cuccioli <small><%= @cage.rabbits.babies.size %> conigli</small></h2>
+  <%= render "rabbits/list", rabbits: @cage.rabbits.babies %>
+<% else %>
+  <h2>Madre</h2>
+  <%= icon_link_to "add", new_cage_mother_rabbit_path(@cage), class: "btn btn-primary btn-fab btn-raised btn-#{@cage.model_name.element}" %>
+<% end %>

@@ -1,0 +1,23 @@
+<div class="list-group">
+
+  <% rabbits.each_with_index do |rabbit, index| %>
+    <% if rabbit %>
+      <%= link_to rabbit_path(rabbit), class: "list-group-item" do %>
+        <div class="row-action-primary row-action-gender-<%= rabbit.gender %>">
+          <i class="code"><%= index + 1 %></i>
+        </div>
+        <div class="row-content">
+          <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+          <!-- <div class="least-content">15m</div> -->
+          <h4 class="list-group-item-heading"><%= pluralize(rabbit.age, "giorno", "giorni") %></h4>
+
+          <% if rabbit.last_weight.present? %>
+            <p class="list-group-item-text">Ultimo peso <%= rabbit.last_weight.value %></p>
+          <% else %>
+            <p class="list-group-item-text">Nessun peso registrato</p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

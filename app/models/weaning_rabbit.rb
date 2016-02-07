@@ -1,0 +1,2 @@
+class WeaningRabbit < Rabbit
+end

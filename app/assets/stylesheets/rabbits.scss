@@ -1,3 +1,21 @@
 // Place all the styles related to the Rabbits controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.list-group .list-group-item .row-action-primary {
+  // background-color: $fattening-color;
+
+  &.row-action-gender-male i {
+    background-color: blue;
+  }
+
+  &.row-action-gender-female i {
+    background-color: pink;
+  }
+}
+
+.general_details {
+  font-size: 20px;
+  text-align: center;
+}

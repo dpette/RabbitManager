@@ -1,6 +1,7 @@
-<h1>Editing Cage</h1>
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", cage_path(@cage) %></li>
+<% end %>
 
-<%= render 'form' %>
+<h1>Modifica Gabbia <%= @cage.code %></h1>
 
-<%= link_to 'Show', @cage %> |
-<%= link_to 'Back', cages_path %>
+<%= render 'form', cage: @cage %>

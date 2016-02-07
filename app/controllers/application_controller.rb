@@ -12,4 +12,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:sign_up) << :last_name
   end
+
+  protected
+    def class_name_by_controller
+      params[:controller].singularize.classify
+    end
+
+    def class_instance_name_by_controller
+      params[:controller].singularize
+    end
+
 end

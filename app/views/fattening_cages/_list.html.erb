@@ -1,0 +1,16 @@
+<div class="list-group">
+  <% cages.each do |cage| %>
+    <%= link_to cage_path(cage), class: "list-group-item" do %>
+      <div class="row-action-primary row-action-<%= cage.model_name.element %>">
+        <i class="cage"><%= cage.code %></i>
+      </div>
+      <div class="row-content">
+        <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+        <!-- <div class="least-content">15m</div> -->
+        <h4 class="list-group-item-heading"><%= cage.compartments_size %> celle, <%= cage.compartments.busy.size %> occupate</h4>
+
+        <p class="list-group-item-text">Altri dati</p>
+      </div>
+    <% end %>
+  <% end %>
+</div>

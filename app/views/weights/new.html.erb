@@ -1,5 +1,7 @@
-<h1>New Weight</h1>
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
+<% end %>
 
-<%= render 'form' %>
+<h1>Nuovo Peso</h1>
 
-<%= link_to 'Back', weights_path %>
+<%= render 'form', weight: @weight %>

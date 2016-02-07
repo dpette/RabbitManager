@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117002746) do
+ActiveRecord::Schema.define(version: 20160206161450) do
 
   create_table "cages", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20160117002746) do
     t.string   "type"
   end
 
+  add_index "cages", ["farm_id"], name: "index_cages_on_farm_id"
+
   create_table "compartments", force: :cascade do |t|
     t.integer  "code"
     t.integer  "name"
@@ -30,6 +32,8 @@ ActiveRecord::Schema.define(version: 20160117002746) do
     t.integer  "cage_id"
   end
 
+  add_index "compartments", ["cage_id"], name: "index_compartments_on_cage_id"
+
   create_table "farms", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -37,27 +41,25 @@ ActiveRecord::Schema.define(version: 20160117002746) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "farms", ["user_id"], name: "index_farms_on_user_id"
+
   create_table "rabbits", force: :cascade do |t|
     t.string   "name"
     t.string   "gender"
     t.integer  "father_id"
     t.integer  "mother_id"
-    t.boolean  "race"
     t.date     "birth_date"
     t.date     "death_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "stayings", force: :cascade do |t|
-    t.integer  "rabbit_id"
-    t.integer  "compartment_id"
-    t.datetime "starting_at"
-    t.datetime "ending_at"
+    t.string   "type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "cage_id"
+    t.integer  "container_id"
+    t.string   "container_type"
+    t.date     "death_on"
   end
+
+  add_index "rabbits", ["container_id"], name: "index_rabbits_on_container_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
@@ -82,9 +84,12 @@ ActiveRecord::Schema.define(version: 20160117002746) do
 
   create_table "weights", force: :cascade do |t|
     t.float    "value"
-    t.datetime "registered_at"
+    t.date     "registered_on"
+    t.integer  "rabbit_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "weights", ["rabbit_id"], name: "index_weights_on_rabbit_id"
 
 end

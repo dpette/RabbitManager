@@ -1,17 +1,7 @@
-<%= bootstrap_form_for(@cage) do |f| %>
-  <% if @cage.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cage.errors.count, "error") %> prohibited this cage from being saved:</h2>
+<%= bootstrap_form_for(cage) do |f| %>
+  <%= f.alert_message "Salvataggio non riuscito:" %>
 
-      <ul>
-      <% @cage.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-
-    </div>
-  <% end %>
-
+  <%= f.hidden_field :type %>
 
   <%= f.text_field :code %>
   <%= f.text_field :name %>
@@ -20,12 +10,9 @@
   <% else %>
     <%= f.select :farm_id, options_from_collection_for_select(current_user.farms, :id, :name) %>
   <% end %>
-  <%= f.select :type, options_for_select(Cage.types.map { |type| [type.type_name, type] }), prompt: "Seleziona il tipo di gabbia" %>
-  <%= render "fattening_cages/fields", f: f %>
+  <%#= f.select :type, options_for_select(Cage.types.map { |type| [type.type_name, type] }), prompt: "Seleziona il tipo di gabbia" %>
+  <%= render "#{cage.model_name.route_key}/fields", cage: cage, f: f %>
 
 
-  <div class="actions">
-    <%= link_to "Indietro", cages_path, class: "btn btn-default" %>
-    <%= f.submit "Crea gabbia", class: "btn btn-primary" %>
-  </div>
+  <%= f.submit nil, class: "btn btn-primary btn-raised btn-lg btn-block" %>
 <% end %>

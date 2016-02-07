@@ -1,11 +1,8 @@
 <h1>Gabbie</h1>
 
-
-<%= render "fattening_cages/list", cages: @fattening_cages %>
-<%#= render "fattening_cages/list" %>
-<%#= render "fattening_cages/list" %>
-<%#= render "fattening_cages/list" %>
+<%= render "list", cages: @fattening_cages %>
+<%= render "list", cages: @motherhood_cages %>
+<%= render "list", cages: @weaning_cages %>
+<%= render "list", cages: @race_cages %>
 
 <br>
-
-<%= link_to content_tag(:i, "+", class: "material-icons"), new_cage_path, class: "btn btn-primary btn-fab" %>

@@ -1,22 +1,30 @@
 class CagesController < ApplicationController
-  before_action :set_cage, only: [:show, :edit, :update, :destroy]
-
   before_filter :authenticate_user!#, except: [:index]
+
+  before_action :set_cage, only: [:show, :edit, :update, :destroy]
+  before_action :set_farm, only: [:index, :new]
+
+
+  before_filter :set_cage_type
 
   # GET /cages
   # GET /cages.json
   def index
-    @fattening_cages = current_user.cages.fattening
+    @fattening_cages  = FatteningCage.where(farm_id: @farm.id)
+    @motherhood_cages = MotherhoodCage.where(farm_id: @farm.id)
+    @weaning_cages    = WeaningCage.where(farm_id: @farm.id)
+    @race_cages       = RaceCage.where(farm_id: @farm.id)
   end
 
   # GET /cages/1
   # GET /cages/1.json
   def show
+    render "#{@cage.model_name.route_key}/show"
   end
 
   # GET /cages/new
   def new
-    @cage = Cage.new
+    @cage = @farm.cages.new(type: class_name_by_controller)
   end
 
   # GET /cages/1/edit
@@ -27,12 +35,6 @@ class CagesController < ApplicationController
   # POST /cages.json
   def create
     @cage = Cage.new(cage_params)
-
-    if cage_params[:compartment_count].present?
-      (1..cage_params[:compartment_count]).each do |i|
-        @cage.compartments.new(code: i)
-      end
-    end
 
     respond_to do |format|
       if @cage.save
@@ -77,6 +79,19 @@ class CagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cage_params
-      params.require(:cage).permit(:name, :code, :farm_id, :type, :compartment_count)
+      params.require(class_instance_name_by_controller.to_sym).
+        permit(:name, :code, :farm_id, :type, :compartments_size, :rabbits_size)
+    end
+
+    def set_farm
+      if current_user.farms.size > 1
+        @farm = current_user.farms.find(params[:farm_id])
+      else
+        @farm = current_user.farms.first
+      end
+    end
+
+    def set_cage_type
+      @cage_type = class_instance_name_by_controller
     end
 end

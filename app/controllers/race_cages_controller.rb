@@ -1,0 +1,2 @@
+class RaceCagesController < CagesController
+end

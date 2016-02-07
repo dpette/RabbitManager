@@ -1,3 +1,7 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", cages_path %></li>
+<% end %>
+
 <h1>Nuova Gabbia</h1>
 
-<%= render 'form' %>
+<%= render 'form', cage: @cage, rabbit: @rabbit %>

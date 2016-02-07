@@ -1,3 +1,11 @@
 // Place all the styles related to the Compartments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.list-group .list-group-item .list-group-item-heading {
+  &.list-group-item-heading-empty {
+    line-height: 60px;
+  }
+}

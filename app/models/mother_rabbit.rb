@@ -1,0 +1,3 @@
+class MotherRabbit < Rabbit
+
+end

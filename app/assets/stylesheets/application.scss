@@ -6,10 +6,82 @@
 @import "devise_bootstrap_views";
 @import "rails_bootstrap_forms";
 // @import "font-awesome";
+@import "nprogress";
+@import "nprogress-bootstrap";
 @import "palette";
+@import "cages";
+@import "rabbits";
+@import "compartments";
 
-.navbar.navbar, .navbar-default.navbar {
+body { padding-top: 70px; }
+
+.navbar, .navbar-default.navbar {
   background-color: $primary-color;
+
+  .nav.navbar-nav {
+    margin: 0 -15px;
+    float: left;
+
+    li {
+      a {
+        line-height: 1;
+      }
+    }
+
+    &.navbar-right {
+      float: right;
+
+      li {
+        float: right;
+      }
+
+      .open {
+        .dropdown-menu {
+          position: absolute;
+          float: left;
+          width: auto;
+          margin-top: 0;
+          background-color: white;
+          border: 0;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+          right: 5px;
+          left: auto;
+
+          li {
+            float: none;
+
+            a {
+              color: #777;
+              font-size: 16px;
+              padding: 13px 16px;
+
+              &:hover, &:focus {
+                background-color: #eeeeee;
+              }
+            }
+          }
+        }
+      }
+
+      @media (min-width: 768px) {
+        margin-right: 0;
+      }
+    }
+  }
+
+}
+
+h1 {
+  position: fixed;
+  top: 0;
+  color: white;
+  z-index: 1060;
+  font-size: 24px;
+  margin: 15px 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
 }
 
 a, a:hover, a:focus {
@@ -24,28 +96,201 @@ a, a:hover, a:focus {
   background-color: $primary-color-dark;
 }
 
+body.fattening_cage {
+  .navbar.navbar, .navbar-default.navbar {
+    background-color: $fattening-color;
+  }
+
+  // a, a:hover, a:focus {
+  //   color: $fattening-color-dark;
+  // }
+
+  .btn-primary:not(.btn-link):not(.btn-flat) {
+    background-color: $fattening-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $fattening-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $fattening-color-dark;
+  }
+
+}
+
+.actions {
+  float: right;
+}
+
+body.motherhood_cage {
+  .navbar.navbar, .navbar-default.navbar {
+    background-color: $motherhood-color;
+  }
+
+  // a, a:hover, a:focus {
+  //   color: $fattening-color-dark;
+  // }
+
+  .btn-primary:not(.btn-link):not(.btn-flat) {
+    background-color: $motherhood-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $motherhood-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $motherhood-color-dark;
+  }
+
+}
+
+body.weaning_cage {
+  .navbar.navbar, .navbar-default.navbar {
+    background-color: $weaning-color;
+  }
+
+  // a, a:hover, a:focus {
+  //   color: $fattening-color-dark;
+  // }
+
+  .btn-primary:not(.btn-link):not(.btn-flat) {
+    background-color: $weaning-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $weaning-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $weaning-color-dark;
+  }
+
+}
+
+body.race_cage {
+  .navbar.navbar, .navbar-default.navbar {
+    background-color: $race-color;
+  }
+
+  // a, a:hover, a:focus {
+  //   color: $fattening-color-dark;
+  // }
+
+  .btn-primary:not(.btn-link):not(.btn-flat) {
+    background-color: $race-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $race-color;
+  }
+
+  .btn-primary:hover:not(.btn-link):not(.btn-flat) {
+    background-color: $race-color-dark;
+  }
+
+}
+
+.actions {
+  float: right;
+}
+
+.actions {
+  float: right;
+}
 
 
+.btn.btn-fab i {
+  top: 0;
+}
+.btn.btn-fab.btn-fab-mini {
+  padding: 9px;
+}
 
-.navbar {
-  .navbar-brand {
-    padding: 5px;
-    @media (min-width: $screen-sm) {
-    }
+.input-group .input-group-btn .btn {
+  border-radius: 100%;
 
-    img {
-      height: 40px;
+  &:first-child {
+    margin-right: 16px;
+  }
 
-      @media (min-width: $screen-sm) {
-        height: 50px;
-      }
-    }
+  &:last-child {
+    margin-left: 16px;
   }
 }
-  
-.btn.btn-fab.btn-bottom.btn-right {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+
+// .navbar {
+//   .navbar-brand {
+//     padding: 5px;
+
+//     img {
+//       height: 40px;
+
+//       @media (min-width: $screen-lg) {
+//         height: 50px;
+//       }
+//     }
+//   }
+// }
+
+.btn-primary:not(.btn-link):not(.btn-flat) {
+
+  &.btn-fattening_cage {
+    background-color: $fattening-color;
+  }
+
+  &.btn-motherhood_cage {
+    background-color: $motherhood-color;
+  }
+
+  &.btn-weaning_cage {
+    background-color: $weaning-color;
+  }
+
+  &.btn-race_cage {
+    background-color: $race-color;
+  }
+}
+
+
+
+.action-buttons {
+  padding: 0;
+
+  @media (min-width: 768px) {
+    padding: 0 16px;
+  }
+}
+
+.list-group .list-group-item {
+  padding: 0;
+
+  @media (min-width: 768px) {
+    padding: 0 16px;
+  }
+
+
+  i {
+    font-style: normal;
+  }
+
+  .row-content {
+
+    .action-secondary {
+      right: 0;
+
+      @media (min-width: 768px) {
+        right: 16px;
+      }
+
+
+      i {
+        font-size: 35px;
+      }
+    }
+
+
+  }
 
 }

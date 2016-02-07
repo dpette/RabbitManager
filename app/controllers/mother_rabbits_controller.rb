@@ -1,0 +1,2 @@
+class MotherRabbitsController < RabbitsController
+end

@@ -1,0 +1,2 @@
+class WeaningCagesController < CagesController
+end

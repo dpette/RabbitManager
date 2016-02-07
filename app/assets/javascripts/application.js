@@ -15,4 +15,6 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require bootstrap-material-design
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .

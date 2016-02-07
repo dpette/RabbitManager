@@ -1,0 +1,3 @@
+class BabyRabbit < Rabbit
+
+end

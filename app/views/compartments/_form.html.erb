@@ -1,10 +1,10 @@
-<%= form_for(@compartment) do |f| %>
-  <% if @compartment.errors.any? %>
+<%= form_for(compartment) do |f| %>
+  <% if compartment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@compartment.errors.count, "error") %> prohibited this compartment from being saved:</h2>
+      <h2><%= pluralize(compartment.errors.count, "error") %> prohibited this compartment from being saved:</h2>
 
       <ul>
-      <% @compartment.errors.full_messages.each do |message| %>
+      <% compartment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

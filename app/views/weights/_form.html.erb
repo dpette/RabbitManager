@@ -1,17 +1,9 @@
-<%= form_for(@weight) do |f| %>
-  <% if @weight.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@weight.errors.count, "error") %> prohibited this weight from being saved:</h2>
+<%= bootstrap_form_for(weight) do |f| %>
 
-      <ul>
-      <% @weight.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.hidden_field :rabbit_id %>
+  <%= f.date_field   :registered_on, min: 1.year.ago, max: Date.today %>
+  <%= f.number_field :value, step: "any", append: "Kg" %>
+
+  <%= f.submit nil, class: "btn btn-primary btn-block btn-lg" %>
 <% end %>

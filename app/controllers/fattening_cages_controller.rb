@@ -1,0 +1,2 @@
+class FatteningCagesController < CagesController
+end

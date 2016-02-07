@@ -1,5 +1,8 @@
 class RabbitsController < ApplicationController
   before_action :set_rabbit, only: [:show, :edit, :update, :destroy]
+  before_action :set_cage,   only: [:show, :edit, :new, :index]
+
+  before_filter :set_rabbit_type
 
   # GET /rabbits
   # GET /rabbits.json
@@ -10,11 +13,14 @@ class RabbitsController < ApplicationController
   # GET /rabbits/1
   # GET /rabbits/1.json
   def show
+    @weights = @rabbit.weights.order("registered_on DESC")
+
+    render "#{@rabbit.model_name.route_key}/show"
   end
 
-  # GET /rabbits/new
+   # GET /rabbits/new
   def new
-    @rabbit = Rabbit.new
+    @rabbit = @cage.rabbits.new(type: class_name_by_controller)
   end
 
   # GET /rabbits/1/edit
@@ -28,7 +34,7 @@ class RabbitsController < ApplicationController
 
     respond_to do |format|
       if @rabbit.save
-        format.html { redirect_to @rabbit, notice: 'Rabbit was successfully created.' }
+        format.html { redirect_to cage_path(@rabbit.cage), notice: 'Rabbit was successfully created.' }
         format.json { render :show, status: :created, location: @rabbit }
       else
         format.html { render :new }
@@ -67,8 +73,21 @@ class RabbitsController < ApplicationController
       @rabbit = Rabbit.find(params[:id])
     end
 
+    def set_cage
+      if @rabbit.present?
+        @cage = @rabbit.cage
+      else
+        @cage = Cage.find(params[:cage_id])
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def rabbit_params
-      params[:rabbit]
+      params.require(class_instance_name_by_controller.to_sym).
+        permit(:name, :container_id, :container_type, :type, :gender)
+    end
+
+    def set_rabbit_type
+      @rabbit_type = class_instance_name_by_controller
     end
 end

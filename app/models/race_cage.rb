@@ -1,0 +1,2 @@
+class RaceCage < Cage
+end

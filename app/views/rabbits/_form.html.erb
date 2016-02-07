@@ -1,17 +1,16 @@
-<%= form_for(@rabbit) do |f| %>
-  <% if @rabbit.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rabbit.errors.count, "error") %> prohibited this rabbit from being saved:</h2>
+<%= bootstrap_form_for(rabbit) do |f| %>
 
-      <ul>
-      <% @rabbit.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= f.hidden_field :container_type, value: "Cage" %>
+  <%= f.hidden_field :container_id %>
+  <%= f.hidden_field :type %>
+  <%= f.text_field :name %>
+  <%= f.date_field :birth_date %>
+
+  <%= render "#{rabbit.model_name.route_key}/fields", rabbit: rabbit, f: f %>
+
 
   <div class="actions">
-    <%= f.submit %>
+    <%= link_to "Indietro", cage_path(rabbit.cage), class: "btn" %>
+    <%= f.submit nil, class: "btn btn-primary btn-raised" %>
   </div>
 <% end %>

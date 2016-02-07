@@ -1,0 +1,2 @@
+class FatteningRabbit < Rabbit
+end

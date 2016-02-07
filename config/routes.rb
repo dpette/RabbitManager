@@ -1,15 +1,31 @@
 Rails.application.routes.draw do
+  resources :race_cages
+  resources :motherhood_cages do
+    resources :mother_rabbits, only: [:new, :index]
+  end
+  resources :weaning_cages
   resources :weights
-  resources :cages
+  resources :cages do
+    resources :mother_rabbits, only: [:new, :index]
+  end
+  resources :fattening_cages
   resources :compartments
   resources :farms
+  resources :rabbits do
+    resources :weights, only: [:new, :index]
+
+    member do
+      get :kill
+    end
+  end
+  resources :mother_rabbits
   resources :rabbits
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'static_pages#home'
+  root 'cages#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

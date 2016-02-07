@@ -1,0 +1,2 @@
+class WeaningCage < Cage
+end

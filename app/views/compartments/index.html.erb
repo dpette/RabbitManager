@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Compartments</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @compartments.each do |compartment| %>
-      <tr>
-        <td><%= link_to 'Show', compartment %></td>
-        <td><%= link_to 'Edit', edit_compartment_path(compartment) %></td>
-        <td><%= link_to 'Destroy', compartment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="list-group">
+  <% @compartments.each do |compartment| %>
+    <% if compartment.rabbit %>
+      <%= link_to rabbit_path(compartment.rabbit), class: "list-group-item" do %>
+        <div class="row-action-primary row-action-fattening">
+          <i class="code"><%= compartment.code %></i>
+        </div>
+        <div class="row-content">
+          <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+          <!-- <div class="least-content">15m</div> -->
+          <h4 class="list-group-item-heading"><%= cage.compartments_size %></h4>
+
+          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+        </div>
+      <% end %>
+    <% else %>
+      no rabbit
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+</div>
 
 <br>
 

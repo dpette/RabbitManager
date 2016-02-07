@@ -5,9 +5,10 @@ class CreateRabbits < ActiveRecord::Migration
       t.string :gender
       t.integer :father_id
       t.integer :mother_id
-      t.boolean :race
+      # t.boolean :race
       t.date :birth_date
       t.date :death_date
+      t.string :type
 
       t.timestamps null: false
     end

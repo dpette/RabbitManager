@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", :back %></li>
+<% end %>
+<% content_for :nav_right do  %>
+  <li><%= icon_link_to "edit", edit_rabbit_path(@rabbit) %></li>
+<% end %>
 
-<%= link_to 'Edit', edit_rabbit_path(@rabbit) %> |
-<%= link_to 'Back', rabbits_path %>
+<%= @rabbit.age %> <br>
+<%= @rabbit.gender %>
+

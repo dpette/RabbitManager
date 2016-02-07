@@ -1,0 +1,7 @@
+<h2><%= cages.model_name.human %> <small><%= pluralize(cages.size, 'gabbia', 'gabbie') %></small></h2>
+
+<%= render "#{cages.model_name.route_key}/list", cages: cages %>
+
+<div class="action-buttons">
+  <%= icon_link_to "add", send("new_#{cages.model_name.singular_route_key}_path"), class: "btn btn-primary btn-fab btn-raised btn-#{cages.model_name.element}" %>
+</div>

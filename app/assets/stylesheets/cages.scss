@@ -1,3 +1,30 @@
 // Place all the styles related to the Cages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.list-group .list-group-item {
+
+  .row-action-primary {
+    padding-top: 5px;
+  }
+
+  .row-content {
+    padding-top: 2px;
+  }
+
+  .row-action-primary.row-action-fattening_cage i {
+    background-color: $fattening-color;
+  }
+
+  .row-action-primary.row-action-motherhood_cage i {
+    background-color: $motherhood-color;
+  }
+
+  .row-action-primary.row-action-weaning_cage i {
+    background-color: $weaning-color;
+  }
+
+  .row-action-primary.row-action-race_cage i {
+    background-color: $race-color;
+  }
+}
