@@ -1,5 +1,5 @@
 <% content_for :nav_left do  %>
-  <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
+  <li><%= icon_link_to "arrow_back", rabbit_weights_path(@rabbit) %></li>
 <% end %>
 <% content_for :nav_right do  %>
   <li><%= icon_link_to "delete", weight_path(@weight), :method => :delete, data: { confirm: "Sicuro di voler eliminare questo Peso?" } %></li>

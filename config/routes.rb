@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :weights, only: [:new, :index]
 
     member do
-      get :kill
+      put :kill
     end
   end
   resources :mother_rabbits

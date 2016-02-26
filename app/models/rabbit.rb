@@ -39,4 +39,12 @@ class Rabbit < ActiveRecord::Base
     self.birth_date ||= Date.today
   end
 
+  def name_or_position
+    self.name.present? ? self.name : self.position
+  end
+
+  def position
+    "Gabbia #{self.cage.code}"
+  end
+
 end

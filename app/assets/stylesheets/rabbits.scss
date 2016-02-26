@@ -19,3 +19,32 @@
   font-size: 20px;
   text-align: center;
 }
+
+.list-group.rabbit-details {
+
+
+  .list-group-item {
+
+    .row-content {
+      h4 {
+        position: absolute;
+        top: 16px;
+      }
+
+      .least-content {
+        right: 70px;
+        top: 23px;
+        font-size: 16px;
+      }
+
+      .action-secondary {
+      }
+    }
+  }
+
+  .list-group-separator:before {
+    width: 100%;
+  }
+}
+
+

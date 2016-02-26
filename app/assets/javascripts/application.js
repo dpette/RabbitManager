@@ -17,4 +17,11 @@
 //= require bootstrap-material-design
 //= require nprogress
 //= require nprogress-turbolinks
+//= require data-confirm-modal
 //= require_tree .
+
+dataConfirmModal.setDefaults({
+  title: 'Sei sicuro?',
+  commit: 'Conferma',
+  cancel: 'Annulla'
+});

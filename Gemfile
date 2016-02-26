@@ -64,3 +64,5 @@ gem 'bootstrap-material-design'
 gem "rails_best_practices"
 # This is basically a ruby gem for asset pipeline which includes the version 0.1.6 of the awesome rstacruz' nprogress library.
 gem 'nprogress-rails'
+# Uses Bootstrap's modals in place of the browser's builtin confirm() API for links generated through Rails' helpers with the :confirm option.
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'

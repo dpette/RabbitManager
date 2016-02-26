@@ -1,10 +1,33 @@
-<% content_for :nav_left do  %>
-  <li><%= icon_link_to "arrow_back", :back %></li>
-<% end %>
-<% content_for :nav_right do  %>
-  <li><%= icon_link_to "edit", edit_rabbit_path(@rabbit) %></li>
-<% end %>
+<%= render "rabbits/nav", rabbit: @rabbit %>
 
-<%= @rabbit.age %> <br>
-<%= @rabbit.gender %>
+<h1><%= @rabbit.name_or_position %></h1>
 
+
+<div class="list-group rabbit-details">
+  <div class="list-group-item">
+    <div class="row-content">
+      <h4 class="list-group-item-heading">Giorni</h4>
+      <div class="least-content"><%= @rabbit.age %></div>
+    </div>
+  </div>
+  <div class="list-group-separator"></div>
+  <div class="list-group-item">
+    <div class="row-content">
+      <h4 class="list-group-item-heading">Sesso</h4>
+      <div class="least-content"><%= @rabbit.gender %></div>
+    </div>
+  </div>
+  <div class="list-group-separator"></div>
+  <a href="<%= rabbit_weights_path(@rabbit) %>" class="list-group-item">
+    <div class="row-content">
+      <h4 class="list-group-item-heading">Peso</h4>
+      <div class="least-content"><%= @rabbit.last_weight %> Kg</div>
+      <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+    </div>
+  </a>
+</div>
+
+<%= link_to "Pesa", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+<%= link_to "Sposta", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+<%= link_to "Uccidi", kill_rabbit_path(@rabbit), method: :put, class: "btn btn-primary btn-block btn-lg", data: { confirm: "I conigli non ritornano più in vita"} %>
+<%= link_to "Registra Parto", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>

@@ -7,7 +7,7 @@ class WeightsController < ApplicationController
   # GET /weights
   # GET /weights.json
   def index
-    @weights = Weight.all
+    @weights = @rabbit.weights
   end
 
   # GET /weights/1
@@ -34,7 +34,7 @@ class WeightsController < ApplicationController
     respond_to do |format|
       if @weight.save
 
-        format.html { redirect_to rabbit_path(@weight.rabbit), notice: 'Weight was successfully created.' }
+        format.html { redirect_to rabbit_weights_path(@weight.rabbit), notice: 'Weight was successfully created.' }
         format.json { render :show, status: :created, location: @weight }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class WeightsController < ApplicationController
   def update
     respond_to do |format|
       if @weight.update(weight_params)
-        format.html { redirect_to rabbit_path(@rabbit), notice: 'Weight was successfully updated.' }
+        format.html { redirect_to rabbit_weights_path(@rabbit), notice: 'Weight was successfully updated.' }
         format.json { render :show, status: :ok, location: @weight }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class WeightsController < ApplicationController
   def destroy
     @weight.destroy
     respond_to do |format|
-      format.html { redirect_to rabbit_path(@rabbit), notice: 'Weight was successfully destroyed.' }
+      format.html { redirect_to rabbit_weights_path(@rabbit), notice: 'Weight was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

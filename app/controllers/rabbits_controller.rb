@@ -1,6 +1,6 @@
 class RabbitsController < ApplicationController
-  before_action :set_rabbit, only: [:show, :edit, :update, :destroy]
-  before_action :set_cage,   only: [:show, :edit, :new, :index]
+  before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill]
+  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill]
 
   before_filter :set_rabbit_type
 
@@ -14,8 +14,6 @@ class RabbitsController < ApplicationController
   # GET /rabbits/1.json
   def show
     @weights = @rabbit.weights.order("registered_on DESC")
-
-    render "#{@rabbit.model_name.route_key}/show"
   end
 
    # GET /rabbits/new
@@ -64,6 +62,18 @@ class RabbitsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to rabbits_url, notice: 'Rabbit was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def kill
+    @rabbit.update_attributes(
+      death_on: params[:death_on] || Date.today,
+      container_id: nil,
+      container_type: nil
+    )
+
+    respond_to do |format|
+      format.html { redirect_to cage_path(@cage), notice: "Registrata uccisione del coniglio"}
     end
   end
 
