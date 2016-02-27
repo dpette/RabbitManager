@@ -26,25 +26,34 @@
   .list-group-item {
 
     .row-content {
+      min-height: 40px;
+
       h4 {
         position: absolute;
-        top: 16px;
+        top: 7px;
       }
 
       .least-content {
         right: 70px;
-        top: 23px;
+        top: 13px;
         font-size: 16px;
       }
 
       .action-secondary {
+        top: 5px;
       }
     }
   }
 
-  .list-group-separator:before {
-    width: 100%;
+  .list-group-separator {
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    &:before {
+      width: 100%;
+    }
   }
+
 }
 
 

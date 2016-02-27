@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206161450) do
+ActiveRecord::Schema.define(version: 20160227142726) do
 
   create_table "cages", force: :cascade do |t|
     t.string   "name"
@@ -51,14 +51,15 @@ ActiveRecord::Schema.define(version: 20160206161450) do
     t.date     "birth_date"
     t.date     "death_date"
     t.string   "type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "cage_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "container_id"
     t.string   "container_type"
-    t.date     "death_on"
+    t.date     "conceptioned_on"
+    t.integer  "conceptioner_id"
   end
 
+  add_index "rabbits", ["conceptioner_id"], name: "index_rabbits_on_conceptioner_id"
   add_index "rabbits", ["container_id"], name: "index_rabbits_on_container_id"
 
   create_table "users", force: :cascade do |t|

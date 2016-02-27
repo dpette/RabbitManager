@@ -1,6 +1,6 @@
 class RabbitsController < ApplicationController
-  before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill]
-  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill]
+  before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill, :birth, :new_birth, :new_conception, :conception]
+  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception]
 
   before_filter :set_rabbit_type
 
@@ -60,20 +60,40 @@ class RabbitsController < ApplicationController
   def destroy
     @rabbit.destroy
     respond_to do |format|
-      format.html { redirect_to rabbits_url, notice: 'Rabbit was successfully destroyed.' }
+      format.html { redirect_to cage_path(@cage), notice: 'Rabbit was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def kill
-    @rabbit.update_attributes(
-      death_on: params[:death_on] || Date.today,
-      container_id: nil,
-      container_type: nil
-    )
+    @rabbit.kill params[:death_date]
 
     respond_to do |format|
       format.html { redirect_to cage_path(@cage), notice: "Registrata uccisione del coniglio"}
+    end
+  end
+
+  def new_birth
+  end
+
+  def birth
+    @rabbit.giving_birth params[:size].to_i, params[:birth_date]
+
+    respond_to do |format|
+      format.html { redirect_to cage_path(@rabbit.cage)}
+    end
+  end
+
+  def new_conception
+    @conceptioners = RaceRabbit.where(container_id: current_user.farms.first.cages.pluck(:id))
+  end
+
+  def conception
+    conceptioner = Rabbit.find_by(id: params[:conceptioner_id])
+    @rabbit.make_conception conceptioner, params[:conceptioned_on]
+
+    respond_to do |format|
+      format.html { redirect_to rabbit_path(@rabbit)}
     end
   end
 

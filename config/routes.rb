@@ -16,6 +16,10 @@ Rails.application.routes.draw do
 
     member do
       put :kill
+      get :new_birth
+      post :birth
+      get :new_conception
+      post :conception
     end
   end
   resources :mother_rabbits

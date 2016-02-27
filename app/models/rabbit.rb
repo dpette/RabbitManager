@@ -7,7 +7,7 @@ class Rabbit < ActiveRecord::Base
   validates :gender,     inclusion: { in: %w(male female) }, allow_nil: true
   validates :birth_date, presence: true
 
-  delegate :cage, to: :compartment, prefix: true
+  # delegate :cage, to: :compartment, prefix: true
 #  delegate :value, to: :weights, prefix: true
 
   after_initialize :default_values
@@ -47,4 +47,18 @@ class Rabbit < ActiveRecord::Base
     "Gabbia #{self.cage.code}"
   end
 
+  def kill death_date = Date.today
+    self.update_attributes(
+      death_date: death_date || Date.today,
+      container: nil
+    )
+  end
+
+  def mother?
+    false
+  end
+
+  def days_from_conception
+    conceptioned_on ? (Date.today - conceptioned_on).to_i : 0
+  end
 end

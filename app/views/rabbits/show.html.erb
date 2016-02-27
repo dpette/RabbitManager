@@ -14,20 +14,34 @@
   <div class="list-group-item">
     <div class="row-content">
       <h4 class="list-group-item-heading">Sesso</h4>
-      <div class="least-content"><%= @rabbit.gender %></div>
+      <div class="least-content"><%= @rabbit.gender || "Sconosciuto" %></div>
     </div>
   </div>
   <div class="list-group-separator"></div>
   <a href="<%= rabbit_weights_path(@rabbit) %>" class="list-group-item">
     <div class="row-content">
       <h4 class="list-group-item-heading">Peso</h4>
-      <div class="least-content"><%= @rabbit.last_weight %> Kg</div>
+      <div class="least-content"><%= @rabbit.last_weight ? "#{@rabbit.last_weight} kg" : "Nessuno" %></div>
       <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
     </div>
   </a>
+  <% if @rabbit.mother? && @rabbit.pregnant? %>
+  <div class="list-group-separator"></div>
+  <div class="list-group-item">
+    <div class="row-content">
+      <h4 class="list-group-item-heading">Concepimento</h4>
+      <div class="least-content"><%= @rabbit.days_from_conception %> giorni</div>
+    </div>
+  </div>
+  <% end %>
 </div>
 
 <%= link_to "Pesa", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
 <%= link_to "Sposta", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
 <%= link_to "Uccidi", kill_rabbit_path(@rabbit), method: :put, class: "btn btn-primary btn-block btn-lg", data: { confirm: "I conigli non ritornano più in vita"} %>
-<%= link_to "Registra Parto", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+<% if @rabbit.mother? %>
+  <%= link_to "Registra Parto", new_birth_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+  <% if !@rabbit.pregnant? %>
+    <%= link_to "Ingravida", new_conception_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+  <% end %>
+<% end %>

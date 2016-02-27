@@ -1,0 +1,15 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
+<% end %>
+
+<h1>Registra Concepimento</h1>
+
+<%= bootstrap_form_tag url: conception_rabbit_path(@rabbit), method: "POST" do |f|  %>
+  <% if @conceptioners.size > 1 %>
+    <%= f.select_tag :conceptioner_id, options_for_select(@conceptioners, :id, :position) %>
+  <% elsif @conceptioners.size == 1 %>
+    <%= f.hidden_field :conceptioner_id, value: @conceptioners.first.id %>
+  <% end %>
+  <%= f.date_field :conceptioned_on, value: Date.today.strftime("%Y-%m-%d") %>
+  <%= f.submit "Registra", class: "btn btn-primary btn-raised btn-lg btn-block" %>
+<% end %>
