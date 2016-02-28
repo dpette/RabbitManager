@@ -2,7 +2,7 @@
 
 
   <%= f.hidden_field :rabbit_id %>
-  <%= f.date_field   :registered_on, min: 1.year.ago, max: Date.today %>
+  <%= f.date_field   :registered_on, min: 1.year.ago.strftime("%Y-%m-%d"), max: Date.today.strftime("%Y-%m-%d") %>
   <%= f.number_field :value, step: "any", append: "Kg" %>
 
   <%= f.submit nil, class: "btn btn-primary btn-block btn-lg" %>

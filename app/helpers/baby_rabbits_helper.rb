@@ -1,0 +1,2 @@
+module BabyRabbitsHelper
+end

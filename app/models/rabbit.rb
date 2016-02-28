@@ -58,6 +58,10 @@ class Rabbit < ActiveRecord::Base
     false
   end
 
+  def baby_rabbit?
+    false
+  end
+
   def days_from_conception
     conceptioned_on ? (Date.today - conceptioned_on).to_i : 0
   end

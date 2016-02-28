@@ -1,6 +1,6 @@
 class RabbitsController < ApplicationController
-  before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill, :birth, :new_birth, :new_conception, :conception]
-  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception]
+  before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill, :birth, :new_birth, :new_conception, :conception, :edit_notes, :new_move]
+  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception, :edit_notes, :new_move]
 
   before_filter :set_rabbit_type
 
@@ -84,6 +84,9 @@ class RabbitsController < ApplicationController
     end
   end
 
+  def edit_notes
+  end
+
   def new_conception
     @conceptioners = RaceRabbit.where(container_id: current_user.farms.first.cages.pluck(:id))
   end
@@ -95,6 +98,9 @@ class RabbitsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to rabbit_path(@rabbit)}
     end
+  end
+
+  def new_move
   end
 
   private
@@ -114,7 +120,7 @@ class RabbitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def rabbit_params
       params.require(class_instance_name_by_controller.to_sym).
-        permit(:name, :container_id, :container_type, :type, :gender)
+        permit(:name, :container_id, :container_type, :type, :gender, :notes, :birth_date, :death_date)
     end
 
     def set_rabbit_type

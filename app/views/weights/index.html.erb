@@ -4,6 +4,10 @@
 
 <h1>Pesi per <%= @rabbit.position %></h1>
 
+<% if !@weights.first || @weights.first.registered_on < Date.today %>
+  <%= link_to "Agiungi peso", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-raised btn-lg btn-block" %>
+<% end %>
+
 <table class="table table-striped table-hover">
   <thead>
     <tr>
@@ -13,12 +17,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @weights.each do |weight| %>
+    <% if @weights.empty? %>
       <tr class="text-center">
-        <td><%= (weight.registered_on - @rabbit.birth_date).to_i %></td>
-        <td><%= weight.value %></td>
-        <td><%= icon_link_to "edit", edit_weight_path(weight) %></td>
+        <td colspan="3">Nessun peso registrato</td>
       </tr>
+    <% else %>
+      <% @weights.each do |weight| %>
+        <tr class="text-center">
+          <td><%= (weight.registered_on - @rabbit.birth_date).to_i %></td>
+          <td><%= weight.value %></td>
+          <td><%= icon_link_to "edit", edit_weight_path(weight) %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
+

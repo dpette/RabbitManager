@@ -6,6 +6,6 @@
 
 <%= bootstrap_form_tag url: birth_rabbit_path(@rabbit), method: "POST" do |f|  %>
   <%= f.number_field :size, min: 1, required: true %>
-  <%= f.date_field :birth_date, value: Date.today.strftime("%Y-%m-%d") %>
+  <%= f.date_field :birth_date, value: Date.today.strftime("%Y-%m-%d"), min: 1.year.ago.strftime("%Y-%m-%d"), max: Date.today.strftime("%Y-%m-%d") %>
   <%= f.submit "Registra", class: "btn btn-primary btn-raised btn-lg btn-block" %>
 <% end %>

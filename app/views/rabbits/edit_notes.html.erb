@@ -1,0 +1,11 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
+<% end %>
+
+
+<h1>Note per <%= @rabbit.position %></h1>
+
+<%= bootstrap_form_for(@rabbit) do |f| %>
+  <%= f.text_area :notes %>
+  <%= f.submit nil, class: "btn btn-primary btn-raised btn-lg btn-block" %>
+<% end %>

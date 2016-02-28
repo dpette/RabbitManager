@@ -4,13 +4,12 @@
   <%= f.hidden_field :container_id %>
   <%= f.hidden_field :type %>
   <%= f.text_field :name %>
-  <%= f.date_field :birth_date %>
+  <%= f.date_field :birth_date, value: (f.object.birth_date || Date.today).strftime("%Y-%m-%d"), min: 1.year.ago.strftime("%Y-%m-%d"), max: Date.today.strftime("%Y-%m-%d") %>
 
   <%= render "#{rabbit.model_name.route_key}/fields", rabbit: rabbit, f: f %>
 
 
   <div class="actions">
-    <%= link_to "Indietro", cage_path(rabbit.cage), class: "btn" %>
-    <%= f.submit nil, class: "btn btn-primary btn-raised" %>
+    <%= f.submit nil, class: "btn btn-primary btn-raised btn-lg btn-block" %>
   </div>
 <% end %>

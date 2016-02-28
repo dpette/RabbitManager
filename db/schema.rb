@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227142726) do
+ActiveRecord::Schema.define(version: 20160227232601) do
 
   create_table "cages", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160227142726) do
     t.string   "container_type"
     t.date     "conceptioned_on"
     t.integer  "conceptioner_id"
+    t.text     "notes"
   end
 
   add_index "rabbits", ["conceptioner_id"], name: "index_rabbits_on_conceptioner_id"

@@ -10,6 +10,6 @@
   <% elsif @conceptioners.size == 1 %>
     <%= f.hidden_field :conceptioner_id, value: @conceptioners.first.id %>
   <% end %>
-  <%= f.date_field :conceptioned_on, value: Date.today.strftime("%Y-%m-%d") %>
+  <%= f.date_field :conceptioned_on, value: Date.today.strftime("%Y-%m-%d"), min: 1.year.ago.strftime("%Y-%m-%d"), max: Date.today.strftime("%Y-%m-%d") %>
   <%= f.submit "Registra", class: "btn btn-primary btn-raised btn-lg btn-block" %>
 <% end %>

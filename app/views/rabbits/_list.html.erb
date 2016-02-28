@@ -12,7 +12,7 @@
           <h4 class="list-group-item-heading"><%= pluralize(rabbit.age, "giorno", "giorni") %></h4>
 
           <% if rabbit.last_weight.present? %>
-            <p class="list-group-item-text">Ultimo peso <%= rabbit.last_weight.value %></p>
+            <p class="list-group-item-text">Ultimo peso <%= rabbit.last_weight %></p>
           <% else %>
             <p class="list-group-item-text">Nessun peso registrato</p>
           <% end %>
