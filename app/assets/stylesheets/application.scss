@@ -298,3 +298,10 @@ body.race_cage {
 a, a:hover, a:focus {
   color: $primary-text-color;
 }
+
+.rails-bootstrap-forms-date-select {
+  select {
+    width: 33.33333%;
+    margin-left: -3px;
+  }
+}

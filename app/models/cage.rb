@@ -50,6 +50,10 @@ class Cage < ActiveRecord::Base
     end
   end
 
+  def title
+    self.code
+  end
+
 
 
 end

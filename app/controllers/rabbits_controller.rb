@@ -32,7 +32,7 @@ class RabbitsController < ApplicationController
 
     respond_to do |format|
       if @rabbit.save
-        format.html { redirect_to cage_path(@rabbit.cage), notice: 'Rabbit was successfully created.' }
+        format.html { redirect_to cage_path(@rabbit.cage), notice: 'Coniglio creato con successo.' }
         format.json { render :show, status: :created, location: @rabbit }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class RabbitsController < ApplicationController
   def update
     respond_to do |format|
       if @rabbit.update(rabbit_params)
-        format.html { redirect_to @rabbit, notice: 'Rabbit was successfully updated.' }
+        format.html { redirect_to @rabbit, notice: 'Coniglio aggiornato con succcesso.' }
         format.json { render :show, status: :ok, location: @rabbit }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class RabbitsController < ApplicationController
   def destroy
     @rabbit.destroy
     respond_to do |format|
-      format.html { redirect_to cage_path(@cage), notice: 'Rabbit was successfully destroyed.' }
+      format.html { redirect_to cage_path(@cage), notice: 'Coniglio elimiato con successo.' }
       format.json { head :no_content }
     end
   end

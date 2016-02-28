@@ -21,9 +21,9 @@
 
 it:
   gender:
-    male: maschio
-    female: femmina
-    unknown: sconosciuto
+    male: Maschio
+    female: Femmina
+    unknown: Sconosciuto
   activerecord:
     models:
       rabbit:
@@ -50,6 +50,8 @@ it:
     attributes:
       rabbit:
         name: Nome
+        gender: Sesso
+        notes: Note
         birth_date: Data di Nascita
       weight:
         registered_on: Registrato il

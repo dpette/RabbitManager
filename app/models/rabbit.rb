@@ -40,7 +40,7 @@ class Rabbit < ActiveRecord::Base
   end
 
   def name_or_position
-    self.name.present? ? self.name : self.position
+    self.name.present? ? self.name : "Coniglio in #{self.position}"
   end
 
   def position

@@ -2,16 +2,15 @@
   <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
 <% end %>
 
-<h1>Pesi per <%= @rabbit.position %></h1>
+<h1>Pesi per <%= @rabbit.name_or_position %></h1>
 
-<% if !@weights.first || @weights.first.registered_on < Date.today %>
-  <%= link_to "Agiungi peso", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-raised btn-lg btn-block" %>
-<% end %>
+<%= icon_link_to "add", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-fab btn-raised btn-block add-weight" %>
+
 
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th class="text-center">Età (giorni)</th>
+      <th class="text-center">Data</th>
       <th class="text-center">Peso (Kg)</th>
       <th></th>
     </tr>
@@ -24,7 +23,7 @@
     <% else %>
       <% @weights.each do |weight| %>
         <tr class="text-center">
-          <td><%= (weight.registered_on - @rabbit.birth_date).to_i %></td>
+          <td><%= weight.registered_on.strftime("%d/%m") %> <small class="age">(<%= (weight.registered_on - @rabbit.birth_date).to_i %> giorni)</small></td>
           <td><%= weight.value %></td>
           <td><%= icon_link_to "edit", edit_weight_path(weight) %></td>
         </tr>

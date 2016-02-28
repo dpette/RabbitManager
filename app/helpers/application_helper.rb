@@ -16,4 +16,5 @@ module ApplicationHelper
   def icon_link_to icon_name, href, options = {}
     link_to content_tag(:i, icon_name, class: "material-icons"), href, options
   end
+
 end

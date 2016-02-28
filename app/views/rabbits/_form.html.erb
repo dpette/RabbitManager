@@ -4,12 +4,12 @@
   <%= f.hidden_field :container_id %>
   <%= f.hidden_field :type %>
   <%= f.text_field :name %>
-  <%= f.date_field :birth_date, value: (f.object.birth_date || Date.today).strftime("%Y-%m-%d"), min: 1.year.ago.strftime("%Y-%m-%d"), max: Date.today.strftime("%Y-%m-%d") %>
+  <%#= f.date_field :birth_date, value: (f.object.birth_date || Date.today).strftime("%Y-%m-%d"), min: 1.year.ago.strftime("%Y-%m-%d"), max: Date.today.strftime("%Y-%m-%d") %>
+  <%= f.date_select :birth_date, use_month_numbers: true, start_year: 1.year.ago.year, end_year: 1.year.from_now.year, default: Date.today %>
+  <%= f.select :gender, [["Sconosciuto", nil], ["Maschio", "male"], ["Femmina", "female"]], prompt: "Scegli il sesso del coniglio" %>
 
   <%= render "#{rabbit.model_name.route_key}/fields", rabbit: rabbit, f: f %>
 
 
-  <div class="actions">
-    <%= f.submit nil, class: "btn btn-primary btn-raised btn-lg btn-block" %>
-  </div>
+  <%= f.submit nil, class: "btn btn-primary btn-raised btn-lg btn-block" %>
 <% end %>

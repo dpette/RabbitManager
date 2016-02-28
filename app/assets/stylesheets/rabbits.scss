@@ -7,11 +7,11 @@
   // background-color: $fattening-color;
 
   &.row-action-gender-male i {
-    background-color: blue;
+    background-color: #2196F3;
   }
 
   &.row-action-gender-female i {
-    background-color: pink;
+    background-color: #F06292;
   }
 }
 
@@ -43,6 +43,12 @@
       .action-secondary {
         top: 3px;
       }
+
+      .list-group-item-text.notes {
+        top: 7px;
+        position: relative;
+        font-size: 17px;
+      }
     }
   }
 
@@ -57,4 +63,8 @@
 
 }
 
+
+.btn.btn-fab.add-weight {
+  margin: 5px auto;
+}
 

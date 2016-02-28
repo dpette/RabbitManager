@@ -3,7 +3,7 @@
 <% end %>
 
 
-<h1>Note per <%= @rabbit.position %></h1>
+<h1>Note per <%= @rabbit.name_or_position %></h1>
 
 <%= bootstrap_form_for(@rabbit) do |f| %>
   <%= f.text_area :notes %>

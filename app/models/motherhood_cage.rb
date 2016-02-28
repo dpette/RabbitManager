@@ -27,4 +27,12 @@ class MotherhoodCage < Cage
   end
 
 
+  def title
+    if self.mother.name.present?
+      self.mother.name
+    else
+      super
+    end
+  end
+
 end
