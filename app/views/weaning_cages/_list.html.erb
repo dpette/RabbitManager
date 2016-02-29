@@ -1,5 +1,5 @@
 <%
-  if defined?(action) || action == :move
+  if defined?(action) && action == :move
     action = "/new_move"
   else
     action = "/cages"
