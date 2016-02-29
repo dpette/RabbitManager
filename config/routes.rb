@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       get :new_conception
       post :conception
       get :edit_notes
+      get :new_move
+      put :move
     end
   end
   resources :mother_rabbits

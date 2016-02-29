@@ -81,7 +81,11 @@ h1 {
   left: 0;
   width: 100%;
   text-align: center;
+  padding: 0 39px;
   pointer-events: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 a, a:hover, a:focus {

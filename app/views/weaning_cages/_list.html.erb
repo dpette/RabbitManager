@@ -1,6 +1,15 @@
+<%
+  if defined?(action) || action == :move
+    action = "/new_move"
+  else
+    action = "/cages"
+  end
+
+%>
+
 <div class="list-group">
   <% cages.each do |cage| %>
-    <%= link_to cage_path(cage), class: "list-group-item" do %>
+    <%= link_to "#{action}/#{cage.id}", class: "list-group-item" do %>
       <div class="row-action-primary row-action-<%= cage.model_name.element %>">
         <i class="cage"><%= cage.code %></i>
       </div>
