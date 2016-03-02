@@ -27,6 +27,4 @@ class FatteningCage < Cage
     end
   end
 
-
-
 end

@@ -92,8 +92,10 @@ class RabbitsController < ApplicationController
   end
 
   def conception
-    conceptioner = Rabbit.find_by(id: params[:conceptioner_id])
-    @rabbit.make_conception conceptioner, params[:conceptioned_on]
+    conceptioner    = Rabbit.find_by(id: params[:conceptioner_id])
+    conceptioned_on = Date.new(params["conceptioned_on(1i)"].to_i, params["conceptioned_on(2i)"].to_i, params["conceptioned_on(3i)"].to_i)
+    logger.info { "conceptioned_on #{conceptioned_on}" }
+    @rabbit.make_conception conceptioner, conceptioned_on
 
     respond_to do |format|
       format.html { redirect_to rabbit_path(@rabbit)}
@@ -101,6 +103,10 @@ class RabbitsController < ApplicationController
   end
 
   def new_move
+    @fattening_cages
+    @motherhood_cages
+    @weaning_cages = current_user.farms.first.cages.weaning
+    @race_cages
   end
 
   private

@@ -17,10 +17,6 @@ class Cage < ActiveRecord::Base
 
   attr_accessor :rabbits_size
 
-  def self.types
-    [FatteningCage, Cage]
-  end
-
   def rabbits_size
     self.rabbits.size
   end
@@ -54,6 +50,21 @@ class Cage < ActiveRecord::Base
     self.code
   end
 
+  def list_item_heading
+    if self.rabbits.any?
+      "#{rabbits_size} conigli presenti"
+    else
+      "Gabbia vuota"
+    end
+  end
+
+  def list_item_text
+    if self.rabbits.any?
+      "Più vecchio: #{self.rabbits.order(:birth_date).first.age} giorni | Più giovane: #{self.rabbits.order(:birth_date).last.age}"
+    else
+      "Non ci sono conigli in questa gabbia"
+    end
+  end
 
 
 end

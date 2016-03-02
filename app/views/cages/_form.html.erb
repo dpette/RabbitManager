@@ -4,7 +4,7 @@
   <%= f.hidden_field :type %>
 
   <%= f.text_field :code %>
-  <%= f.text_field :name %>
+  <%#= f.text_field :name %>
   <% if current_user.farms.size == 1 %>
     <%= f.hidden_field :farm_id, value: current_user.farms.first.id %>
   <% else %>

@@ -53,6 +53,12 @@ it:
         gender: Sesso
         notes: Note
         birth_date: Data di Nascita
+        mother: Madre
+        father: Padre
+        death_date: Data di Morte
+        type: tipo
+        conceptioner_id: Concepitore
+        conceptioned_on: Concepito il
       weight:
         registered_on: Registrato il
         value: Valore

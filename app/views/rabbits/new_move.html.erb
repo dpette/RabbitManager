@@ -1,5 +1,10 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
+<% end %>
+
 <h1>Sposta coniglio</h1>
 
-<% if @rabbit.baby_rabbit? %>
-
-<% end %>
+<%= render "cages/move_list", cages: @fattening_cages %>
+<%= render "cages/move_list", cages: @motherhood_cages %>
+<%= render "cages/move_list", cages: @weaning_cages %>
+<%= render "cages/move_list", cages: @race_cages %>
