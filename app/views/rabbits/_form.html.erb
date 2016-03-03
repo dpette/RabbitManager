@@ -1,14 +1,36 @@
+<%
+
+if !defined?(fields)
+  fields = nil
+end
+
+ %>
+
 <%= bootstrap_form_for(rabbit) do |f| %>
 
-  <%= f.hidden_field :container_type, value: "Cage" %>
-  <%= f.hidden_field :container_id %>
-  <%= f.hidden_field :type %>
-  <%= f.text_field :name %>
-  <%#= f.date_field :birth_date, value: (f.object.birth_date || Date.today).strftime("%Y-%m-%d"), min: 1.year.ago.strftime("%Y-%m-%d"), max: Date.today.strftime("%Y-%m-%d") %>
-  <%= f.date_select :birth_date, use_month_numbers: true, start_year: 1.year.ago.year, end_year: 1.year.from_now.year, default: Date.today %>
-  <%= f.select :gender, [["Sconosciuto", nil], ["Maschio", "male"], ["Femmina", "female"]], prompt: "Scegli il sesso del coniglio" %>
+  <% if fields %>
+    <% fields.each do |field| %>
+      <% if field == "birth_date" || field == "death_date" || field == "conceptioned_on" %>
+        <%= f.date_select field, use_month_numbers: true, start_year: 1.year.ago.year, end_year: 1.year.from_now.year, default: Date.today %>
+      <% elsif field == "name" %>
+        <%= f.text_field field %>
+      <% elsif field == "gender" %>
+        <%= f.select :gender, [["Sconosciuto", "unknown"], ["Maschio", "male"], ["Femmina", "female"]], prompt: "Scegli il sesso del coniglio" %>
+      <% elsif field == "notes" %>
+        <%= f.text_area :notes %>
+      <% end %>
+    <% end %>
+  <% else %>
+      <%= f.hidden_field :container_type, value: "Cage" %>
+      <%= f.hidden_field :container_id %>
+      <%= f.hidden_field :type %>
+      <%= f.text_field :name %>
+      <%= f.date_select :birth_date, use_month_numbers: true, start_year: 1.year.ago.year, end_year: 1.year.from_now.year, default: Date.today %>
+      <%= f.select :gender, [["Sconosciuto", "unknown"], ["Maschio", "male"], ["Femmina", "female"]], prompt: "Scegli il sesso del coniglio" %>
+      <%= f.text_area :notes %>
 
-  <%= render "#{rabbit.model_name.route_key}/fields", rabbit: rabbit, f: f %>
+      <%= render "#{rabbit.model_name.route_key}/fields", rabbit: rabbit, f: f %>
+  <% end %>
 
 
   <%= f.submit nil, class: "btn btn-primary btn-raised btn-lg btn-block" %>

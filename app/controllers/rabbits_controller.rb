@@ -23,6 +23,7 @@ class RabbitsController < ApplicationController
 
   # GET /rabbits/1/edit
   def edit
+    @fields = params[:fields]
   end
 
   # POST /rabbits
@@ -77,7 +78,9 @@ class RabbitsController < ApplicationController
   end
 
   def birth
-    @rabbit.giving_birth params[:size].to_i, params[:birth_date]
+    size       = params[:size].to_i
+    birth_date = Date.new(params["birth_date(1i)"].to_i, params["birth_date(2i)"].to_i, params["birth_date(3i)"].to_i)
+    @rabbit.giving_birth size, birth_date
 
     respond_to do |format|
       format.html { redirect_to cage_path(@rabbit.cage)}
@@ -126,7 +129,7 @@ class RabbitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def rabbit_params
       params.require(class_instance_name_by_controller.to_sym).
-        permit(:name, :container_id, :container_type, :type, :gender, :notes, :birth_date, :death_date)
+        permit(:name, :container_id, :container_type, :type, :gender, :notes, :birth_date, :death_date, :conceptioner_id, :conceptioned_on)
     end
 
     def set_rabbit_type

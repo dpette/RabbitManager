@@ -4,7 +4,7 @@ class Rabbit < ActiveRecord::Base
 
   has_many :weights
 
-  validates :gender,     inclusion: { in: %w(male female) }, allow_nil: true
+  validates :gender,     inclusion: { in: ["male", "female", "unknown"] }, allow_nil: true
   validates :birth_date, presence: true
 
   # delegate :cage, to: :compartment, prefix: true

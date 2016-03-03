@@ -4,19 +4,21 @@
 
 
 <div class="list-group rabbit-details">
-  <div class="list-group-item">
+  <a href="<%= edit_rabbit_path(@rabbit, fields: [:birth_date]) %>" class="list-group-item">
     <div class="row-content">
       <h4 class="list-group-item-heading">Età</h4>
       <div class="least-content"><%= @rabbit.age %> giorni</div>
+      <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
     </div>
-  </div>
+  </a>
   <div class="list-group-separator"></div>
-  <div class="list-group-item">
+  <a href="<%= edit_rabbit_path(@rabbit, fields: [:gender]) %>" class="list-group-item">
     <div class="row-content">
       <h4 class="list-group-item-heading">Sesso</h4>
       <div class="least-content"><%= t("gender.#{@rabbit.gender || "unknown"}") %></div>
+      <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
     </div>
-  </div>
+  </a>
   <div class="list-group-separator"></div>
   <a href="<%= rabbit_weights_path(@rabbit) %>" class="list-group-item">
     <div class="row-content">
@@ -26,26 +28,26 @@
     </div>
   </a>
   <div class="list-group-separator"></div>
-  <a href="<%= edit_notes_rabbit_path(@rabbit) %>" class="list-group-item">
+  <a href="<%= edit_rabbit_path(@rabbit, fields: [:notes]) %>" class="list-group-item">
     <div class="row-content">
       <% if @rabbit.notes.present? %>
         <p class="list-group-item-text notes"><%= @rabbit.notes.capitalize %></p>
       <% else %>
         <h4 class="list-group-item-heading">Note</h4>
       <% end %>
-
       <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
     </div>
   </a>
   <div class="list-group-separator"></div>
   <% if @rabbit.mother? && @rabbit.pregnant? %>
-  <div class="list-group-item">
-    <div class="row-content">
-      <h4 class="list-group-item-heading">Concepimento</h4>
-      <div class="least-content"><%= @rabbit.days_from_conception %> giorni</div>
-    </div>
-  </div>
-  <div class="list-group-separator"></div>
+    <a href="<%= edit_rabbit_path(@rabbit, fields: [:conceptioned_on]) %>" class="list-group-item">
+      <div class="row-content">
+        <h4 class="list-group-item-heading">Concepimento</h4>
+        <div class="least-content"><%= @rabbit.days_from_conception %> giorni</div>
+        <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+      </div>
+    </a>
+    <div class="list-group-separator"></div>
   <% end %>
 </div>
 
