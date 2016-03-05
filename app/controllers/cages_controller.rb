@@ -80,7 +80,7 @@ class CagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cage_params
       params.require(class_instance_name_by_controller.to_sym).
-        permit(:name, :code, :farm_id, :type, :compartments_size, :rabbits_size)
+        permit(:name, :code, :farm_id, :type, :compartments_size)
     end
 
     def set_farm

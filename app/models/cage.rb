@@ -21,23 +21,23 @@ class Cage < ActiveRecord::Base
     self.rabbits.size
   end
 
-  def rabbits_size=rabbits_size
-    return if rabbits_size.to_i != rabbits_size.to_i
+  # def rabbits_size=rabbits_size
+  #   return if rabbits_size.to_i != rabbits_size.to_i
 
-    diff = rabbits_size.to_i - self.rabbits.size
+  #   diff = rabbits_size.to_i - self.rabbits.size
 
-    if diff < 0
+  #   if diff < 0
 
-      self.rabbits.destroy(self.rabbits.order(code: :desc).limit(diff.abs))
-    elsif diff > 0
+  #     self.rabbits.destroy(self.rabbits.order(code: :desc).limit(diff.abs))
+  #   elsif diff > 0
 
-      (self.rabbits.size.(self.rabbits.size + diff)).each do |c|
-        logger.info { "add rabbit! #{c}" }
+  #     (self.rabbits.size.(self.rabbits.size + diff)).each do |c|
+  #       logger.info { "add rabbit! #{c}" }
 
-        self.rabbits.new
-      end
-    end
-  end
+  #       self.rabbits.new
+  #     end
+  #   end
+  # end
 
 
   def set_code

@@ -4,9 +4,9 @@ class MotherhoodCage < Cage
     self.rabbits.mothers.first
   end
 
-  # def rabbits_size
-  #   self.rabbits.babies.size
-  # end
+  def rabbits_size
+    self.rabbits.babies.size
+  end
 
   # def rabbits_size=rabbits_size
   #   return if rabbits_size.to_i != rabbits_size.to_i
