@@ -80,4 +80,21 @@ class Rabbit < ActiveRecord::Base
       "notes"
     ]
   end
+
+  def list_item_title
+    name_or_position
+  end
+
+  def secondary_infos
+    infos = {}
+
+    if self.last_weight.present?
+      infos[:weight] = "#{self.last_weight} Kg"
+    else
+      infos[:weight] = "Nessun peso"
+    end
+
+    infos
+  end
+
 end

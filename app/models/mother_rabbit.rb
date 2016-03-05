@@ -26,5 +26,19 @@ class MotherRabbit < Rabbit
     e_f
   end
 
+  def secondary_infos
+    infos = super
+
+    puts infos
+
+    if self.pregnant?
+      infos[:pregnancy] = "Incinta da #{self.in_progress_pregnancy.days_from_start} giorni"
+    else
+      infos[:pregnancy] = "#{self.pregnancies.completed.size} parti"
+    end
+
+    infos
+  end
+
 
 end

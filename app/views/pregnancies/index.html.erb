@@ -9,22 +9,22 @@
 <% end %>
 
 
-<table class="table table-striped table-hover">
+<table class="table table-hover">
   <thead>
     <tr>
-      <th class="text-center">Fine Gravidanza</th>
-      <th class="text-center">Cuccioli</th>
+      <th>Fine Gravidanza</th>
+      <th>Cuccioli</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% if @pregnancies.empty? %>
-      <tr class="text-center">
+      <tr>
         <td colspan="3">Nessuna gravidanza registrata</td>
       </tr>
     <% else %>
       <% @pregnancies.each do |pregnancy| %>
-        <tr class="text-center">
+        <tr>
           <% if pregnancy.in_progress? %>
             <td>In corso, iniziata <%= pregnancy.days_from_start %> giorni fa</td>
             <td></td>

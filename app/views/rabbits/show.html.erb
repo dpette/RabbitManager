@@ -28,17 +28,6 @@
     </div>
   </a>
   <div class="list-group-separator"></div>
-  <a href="<%= edit_rabbit_path(@rabbit, fields: [:notes]) %>" class="list-group-item">
-    <div class="row-content">
-      <% if @rabbit.notes.present? %>
-        <p class="list-group-item-text notes"><%= @rabbit.notes.capitalize %></p>
-      <% else %>
-        <h4 class="list-group-item-heading">Note</h4>
-      <% end %>
-      <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
-    </div>
-  </a>
-  <div class="list-group-separator"></div>
   <% if @rabbit.mother? %>
     <% if @rabbit.pregnant? %>
       <a href="<%= edit_pregnancy_path(@rabbit.in_progress_pregnancy) %>" class="list-group-item">
@@ -59,6 +48,17 @@
     </a>
     <div class="list-group-separator"></div>
   <% end %>
+  <a href="<%= edit_rabbit_path(@rabbit, fields: [:notes]) %>" class="list-group-item">
+    <div class="row-content">
+      <% if @rabbit.notes.present? %>
+        <p class="list-group-item-text notes"><%= @rabbit.notes.capitalize %></p>
+      <% else %>
+        <h4 class="list-group-item-heading">Note</h4>
+      <% end %>
+      <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+    </div>
+  </a>
+  <div class="list-group-separator"></div>
 </div>
 
 <%= link_to "Pesa", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>

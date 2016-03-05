@@ -24,11 +24,7 @@
         <!-- <div class="least-content">15m</div> -->
         <h4 class="list-group-item-heading"><%= @cage.mother.name || @cage.mother.code %></h4>
 
-        <% if @cage.mother.last_weight.present? %>
-          <p class="list-group-item-text"><%= pluralize(@cage.mother.age, "giorno", "giorni") %> | ultimo peso <%= @cage.mother.last_weight %></p>
-        <% else %>
-          <p class="list-group-item-text">Nessun peso registrato</p>
-        <% end %>
+        <p class="list-group-item-text"><%= list_item_text @cage.mother %></p>
       </div>
     <% end %>
   </div>
