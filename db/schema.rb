@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227232601) do
+ActiveRecord::Schema.define(version: 20160304214225) do
 
   create_table "cages", force: :cascade do |t|
     t.string   "name"
@@ -43,25 +43,32 @@ ActiveRecord::Schema.define(version: 20160227232601) do
 
   add_index "farms", ["user_id"], name: "index_farms_on_user_id"
 
+  create_table "pregnancies", force: :cascade do |t|
+    t.date     "starting_at"
+    t.date     "ending_at"
+    t.integer  "rabbit_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "pregnancies", ["rabbit_id"], name: "index_pregnancies_on_rabbit_id"
+
   create_table "rabbits", force: :cascade do |t|
     t.string   "name"
     t.string   "gender"
-    t.integer  "father_id"
-    t.integer  "mother_id"
     t.date     "birth_date"
     t.date     "death_date"
     t.string   "type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "container_id"
     t.string   "container_type"
-    t.date     "conceptioned_on"
-    t.integer  "conceptioner_id"
     t.text     "notes"
+    t.integer  "pregnancy_id"
   end
 
-  add_index "rabbits", ["conceptioner_id"], name: "index_rabbits_on_conceptioner_id"
   add_index "rabbits", ["container_id"], name: "index_rabbits_on_container_id"
+  add_index "rabbits", ["pregnancy_id"], name: "index_rabbits_on_pregnancy_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username"

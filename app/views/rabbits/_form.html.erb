@@ -1,16 +1,14 @@
 <%
 
 if !defined?(fields)
-  fields = nil
+  fields = rabbit.editable_fields
 end
 
  %>
 
 <%= bootstrap_form_for(rabbit) do |f| %>
-
-  <% if fields %>
     <% fields.each do |field| %>
-      <% if field == "birth_date" || field == "death_date" || field == "conceptioned_on" %>
+      <% if field == "birth_date" || field == "death_date" %>
         <%= f.date_select field, use_month_numbers: true, start_year: 1.year.ago.year, end_year: 1.year.from_now.year, default: Date.today %>
       <% elsif field == "name" %>
         <%= f.text_field field %>
@@ -18,18 +16,11 @@ end
         <%= f.select :gender, [["Sconosciuto", "unknown"], ["Maschio", "male"], ["Femmina", "female"]], prompt: "Scegli il sesso del coniglio" %>
       <% elsif field == "notes" %>
         <%= f.text_area :notes %>
+      <%= elsif field.in?["container_type", "container_id", "type"] %>
+        <%= f.hidden_field field %>
       <% end %>
     <% end %>
-  <% else %>
-      <%= f.hidden_field :container_type, value: "Cage" %>
-      <%= f.hidden_field :container_id %>
-      <%= f.hidden_field :type %>
-      <%= f.text_field :name %>
-      <%= f.date_select :birth_date, use_month_numbers: true, start_year: 1.year.ago.year, end_year: 1.year.from_now.year, default: Date.today %>
-      <%= f.select :gender, [["Sconosciuto", "unknown"], ["Maschio", "male"], ["Femmina", "female"]], prompt: "Scegli il sesso del coniglio" %>
-      <%= f.text_area :notes %>
-
-      <%= render "#{rabbit.model_name.route_key}/fields", rabbit: rabbit, f: f %>
+    <%#= render "#{rabbit.model_name.route_key}/fields", rabbit: rabbit, f: f, fields: fields %>
   <% end %>
 
 

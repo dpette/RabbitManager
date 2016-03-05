@@ -39,11 +39,21 @@
     </div>
   </a>
   <div class="list-group-separator"></div>
-  <% if @rabbit.mother? && @rabbit.pregnant? %>
-    <a href="<%= edit_rabbit_path(@rabbit, fields: [:conceptioned_on]) %>" class="list-group-item">
+  <% if @rabbit.mother? %>
+    <% if @rabbit.pregnant? %>
+      <a href="<%= edit_pregnancy_path(@rabbit.in_progress_pregnancy) %>" class="list-group-item">
+        <div class="row-content">
+          <h4 class="list-group-item-heading">Incinta da</h4>
+          <div class="least-content"><%= @rabbit.in_progress_pregnancy.days_from_start %> giorni</div>
+          <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+        </div>
+      </a>
+      <div class="list-group-separator"></div>
+    <% end %>
+    <a href="<%= rabbit_pregnancies_path(@rabbit) %>" class="list-group-item">
       <div class="row-content">
-        <h4 class="list-group-item-heading">Concepimento</h4>
-        <div class="least-content"><%= @rabbit.days_from_conception %> giorni</div>
+        <h4 class="list-group-item-heading">Gravidanze concluse</h4>
+        <div class="least-content"><%= @rabbit.pregnancies.completed.size %></div>
         <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
       </div>
     </a>
@@ -52,11 +62,10 @@
 </div>
 
 <%= link_to "Pesa", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
-<%= link_to "Sposta", new_move_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+<%#= link_to "Sposta", available_cages_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
 <%= link_to "Uccidi", kill_rabbit_path(@rabbit), method: :put, class: "btn btn-primary btn-block btn-lg", data: { confirm: "I conigli non ritornano più in vita"} %>
 <% if @rabbit.mother? %>
-  <%= link_to "Registra Parto", new_birth_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
   <% if !@rabbit.pregnant? %>
-    <%= link_to "Ingravida", new_conception_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+    <%= link_to "Ingravida", new_rabbit_pregnancy_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
   <% end %>
 <% end %>

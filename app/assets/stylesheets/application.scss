@@ -5,7 +5,7 @@
 @import "bootstrap-material-design";
 @import "devise_bootstrap_views";
 @import "rails_bootstrap_forms";
-// @import "font-awesome";
+// @import "awesome-bootstrap-checkbox";
 @import "nprogress";
 @import "nprogress-bootstrap";
 @import "palette";
@@ -308,4 +308,16 @@ a, a:hover, a:focus {
     width: 33.33333%;
     margin-left: -3px;
   }
+}
+
+.disable-in-progress {
+  &.disabled {
+    label, input, select, textarea, button {
+      opacity: 0.3;
+    }
+  }
+}
+
+.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+  font-size: 17px;
 }

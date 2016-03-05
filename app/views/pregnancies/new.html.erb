@@ -1,0 +1,8 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
+<% end %>
+
+<h1>Nuova Gravidanza</h1>
+
+<%= render 'form', pregnancy: @pregnancy %>
+

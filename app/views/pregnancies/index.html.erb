@@ -1,0 +1,41 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", rabbit_path(@rabbit) %></li>
+<% end %>
+
+<h1>Gravidanze per <%= @rabbit.name_or_position %></h1>
+
+<% if !@rabbit.in_progress_pregnancy %>
+  <%= icon_link_to "add", new_rabbit_pregnancy_path(@rabbit), class: "btn btn-primary btn-fab btn-raised btn-block add-weight" %>
+<% end %>
+
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th class="text-center">Fine Gravidanza</th>
+      <th class="text-center">Cuccioli</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @pregnancies.empty? %>
+      <tr class="text-center">
+        <td colspan="3">Nessuna gravidanza registrata</td>
+      </tr>
+    <% else %>
+      <% @pregnancies.each do |pregnancy| %>
+        <tr class="text-center">
+          <% if pregnancy.in_progress? %>
+            <td>In corso, iniziata <%= pregnancy.days_from_start %> giorni fa</td>
+            <td></td>
+          <% else %>
+            <td><%= pregnancy.ending_at.strftime("%d/%m") %></td>
+            <td><%= pregnancy.rabbits.size %></td>
+          <% end %>
+          <td><%= icon_link_to "edit", edit_pregnancy_path(pregnancy) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+

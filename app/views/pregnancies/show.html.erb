@@ -1,0 +1,17 @@
+<p>
+  <strong>Starting at:</strong>
+  <%= @pregnancy.starting_at %>
+</p>
+
+<p>
+  <strong>Ending at:</strong>
+  <%= @pregnancy.ending_at %>
+</p>
+
+<p>
+  <strong>Rabbit:</strong>
+  <%= @pregnancy.rabbit_id %>
+</p>
+
+<%= link_to 'Edit', edit_pregnancy_path(@pregnancy) %> |
+<%= link_to 'Back', pregnancies_path %>

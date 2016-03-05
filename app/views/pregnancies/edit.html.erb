@@ -1,0 +1,11 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", rabbit_pregnancies_path(@rabbit) %></li>
+<% end %>
+<% content_for :nav_right do  %>
+  <li><%= icon_link_to "delete", pregnancy_path(@pregnancy), :method => :delete, data: { confirm: "Vuoi eliminare questa Gravidanza? Tutti gli eventuali figli saranno eliminati." } %></li>
+<% end %>
+
+
+<h1>Modifica Gravidanza</h1>
+
+<%= render 'form', pregnancy: @pregnancy, fields: @fields %>

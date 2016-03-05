@@ -2,42 +2,29 @@ class MotherRabbit < Rabbit
 
   validates :gender,     inclusion: { in: %w(female) }, allow_nil: false
 
+  has_many :pregnancies, :class_name => "Pregnancy", :foreign_key => "rabbit_id", dependent: :destroy
 
   def position
     "Madre per #{self.cage.code}"
-  end
-
-  def giving_birth size, birth_date = Date.today
-    (1..size).each do |c|
-      Rabbit.create(
-        container_type: self.container_type,
-        container_id:   self.container_id,
-        mother_id: self.id,
-        father_id: self.conceptioner_id,
-        birth_date: birth_date,
-        type: "BabyRabbit"
-      )
-    end
-
-    self.update_attributes(
-      conceptioner_id: nil,
-      conceptioned_on: nil
-    )
   end
 
   def mother?
     true
   end
 
-  def make_conception conceptioner = nil, conceptioned_on = Date.today
-    self.update_attributes(
-      conceptioner_id: conceptioner.try(:id),
-      conceptioned_on: conceptioned_on
-    )
+  def in_progress_pregnancy
+    self.pregnancies.in_progress.first
   end
 
   def pregnant?
-    conceptioned_on.present?
+    self.in_progress_pregnancy.present?
   end
+
+  def editable_fields
+    e_f = super
+    e_f.delete("gender")
+    e_f
+  end
+
 
 end

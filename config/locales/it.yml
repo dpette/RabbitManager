@@ -47,6 +47,9 @@ it:
       race_cage:
         one: Gabbia da Razza
         other: Gabbie da Razza
+      pregnancy:
+        one: Gravidanza
+        other: Gravidanze
     attributes:
       rabbit:
         name: Nome
@@ -57,8 +60,6 @@ it:
         father: Padre
         death_date: Data di Morte
         type: tipo
-        conceptioner_id: Concepitore
-        conceptioned_on: Concepito il
       weight:
         registered_on: Registrato il
         value: Valore
@@ -67,6 +68,12 @@ it:
         name: Nome
         rabbits_size: Numero di conigli
         compartments_size: Numero di celle
+      pregnancy:
+        starting_at: Inizio
+        ending_at: Fine
+        rabbit_id: Coniglia
+        rabbits: Conigli
+        rabbits_size: Quantità cuccioli
   date:
     abbr_day_names:
     - dom

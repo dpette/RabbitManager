@@ -1,6 +1,6 @@
 class RabbitsController < ApplicationController
-  before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill, :birth, :new_birth, :new_conception, :conception, :edit_notes, :new_move]
-  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception, :edit_notes, :new_move]
+  before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill, :birth, :new_birth, :new_conception, :conception, :edit_notes, :available_cages, :move]
+  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception, :edit_notes, :available_cages, :move]
 
   before_filter :set_rabbit_type
 
@@ -105,11 +105,24 @@ class RabbitsController < ApplicationController
     end
   end
 
-  def new_move
+  def available_cages
     @fattening_cages
     @motherhood_cages
     @weaning_cages = current_user.farms.first.cages.weaning
     @race_cages
+  end
+
+  def available_compartments
+  end
+
+  def move
+    @new_cage = Cage.find(params[:new_cage_id])
+
+    if @rabbit.move @new_cage
+      redirect_to cage_path(@new_cage), notice: "Coniglio spostato con successo"
+    else
+      redirect_to new_move_rabbit_path(@rabbit), error: @rabbit.error.full_messages
+    end
   end
 
   private

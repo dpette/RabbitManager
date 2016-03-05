@@ -4,16 +4,17 @@ Rails.application.routes.draw do
     resources :mother_rabbits, only: [:new, :index]
   end
   resources :weaning_cages
-  resources :weights
   resources :cages do
     resources :mother_rabbits, only: [:new, :index]
   end
   resources :fattening_cages
   resources :compartments
   resources :farms
+  resources :weights
+  resources :pregnancies
   resources :rabbits do
     resources :weights, only: [:new, :index]
-
+    resources :pregnancies, only: [:new, :index]
     member do
       put :kill
       get :new_birth
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
       get :new_conception
       post :conception
       get :edit_notes
-      get :new_move
+      get :available_cages
       put :move
     end
   end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  starting_at: 2016-03-04
+  ending_at: 2016-03-04
+  rabbit_id: 1
+
+two:
+  starting_at: 2016-03-04
+  ending_at: 2016-03-04
+  rabbit_id: 1

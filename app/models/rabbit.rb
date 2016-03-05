@@ -4,11 +4,14 @@ class Rabbit < ActiveRecord::Base
 
   has_many :weights
 
+  belongs_to :pregnancy
+
   validates :gender,     inclusion: { in: ["male", "female", "unknown"] }, allow_nil: true
   validates :birth_date, presence: true
 
   # delegate :cage, to: :compartment, prefix: true
 #  delegate :value, to: :weights, prefix: true
+  delegate :mother, to: :pregnancy
 
   after_initialize :default_values
 
@@ -54,6 +57,10 @@ class Rabbit < ActiveRecord::Base
     )
   end
 
+  def move new_cage
+    self.update_attributes(container_id: new_cage.id, container_type: new_cage.type)
+  end
+
   def mother?
     false
   end
@@ -62,7 +69,15 @@ class Rabbit < ActiveRecord::Base
     false
   end
 
-  def days_from_conception
-    conceptioned_on ? (Date.today - conceptioned_on).to_i : 0
+  def editable_fields
+    [
+      "container_type",
+      "container_id",
+      "type",
+      "name",
+      "birth_date",
+      "gender",
+      "notes"
+    ]
   end
 end
