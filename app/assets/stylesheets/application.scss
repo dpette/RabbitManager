@@ -6,6 +6,8 @@
 @import "devise_bootstrap_views";
 @import "rails_bootstrap_forms";
 // @import "awesome-bootstrap-checkbox";
+$nprogress-color: white !default;
+$nprogress-height: 3px;
 @import "nprogress";
 @import "nprogress-bootstrap";
 @import "palette";
@@ -76,8 +78,8 @@ h1 {
   top: 0;
   color: white;
   z-index: 1060;
-  font-size: 24px;
-  margin: 15px 0;
+  font-size: 21px;
+  margin: 17px 0;
   left: 0;
   width: 100%;
   text-align: center;
@@ -324,5 +326,31 @@ a, a:hover, a:focus {
 }
 
 .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
-  font-size: 17px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+
+.form-control {
+  font-size: 20px;
+}
+
+.checkbox input[type=checkbox]:checked + .checkbox-material .check, .checkbox-default input[type=checkbox]:checked + .checkbox-material .check {
+  color: #555555;
+}
+
+.checkbox input[type=checkbox]:checked + .checkbox-material .check:before, .checkbox-default input[type=checkbox]:checked + .checkbox-material .check:before {
+  color: #555555;
+}
+
+// #nprogress .spinner {
+// }
+
+#nprogress .spinner-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.table.table-clickable-row > tbody > tr:hover {
+  cursor: pointer;
 }

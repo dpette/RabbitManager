@@ -4,6 +4,8 @@ class MotherRabbit < Rabbit
 
   has_many :pregnancies, :class_name => "Pregnancy", :foreign_key => "rabbit_id", dependent: :destroy
 
+  after_initialize :set_gender
+
   def position
     "Madre per #{self.cage.code}"
   end
@@ -26,6 +28,11 @@ class MotherRabbit < Rabbit
     e_f
   end
 
+  def list_item_title
+    self.name.present? ? self.name : "Madre per gabbia #{self.cage.code}"
+  end
+
+
   def secondary_infos
     infos = super
 
@@ -40,5 +47,10 @@ class MotherRabbit < Rabbit
     infos
   end
 
+
+  private
+    def set_gender
+      self.gender = "female"
+    end
 
 end

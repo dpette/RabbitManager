@@ -7,7 +7,7 @@
 <%= icon_link_to "add", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-fab btn-raised btn-block add-weight" %>
 
 
-<table class="table table-hover">
+<table class="table table-hover table-clickable-row">
   <thead>
     <tr>
       <th>Data</th>
@@ -22,7 +22,7 @@
       </tr>
     <% else %>
       <% @weights.each do |weight| %>
-        <tr class="text-center">
+        <tr>
           <td><%= weight.registered_on.strftime("%d/%m") %> <small class="age">(<%= (weight.registered_on - @rabbit.birth_date).to_i %> giorni)</small></td>
           <td><%= weight.value %></td>
           <td><%= icon_link_to "edit", edit_weight_path(weight) %></td>

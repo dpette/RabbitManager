@@ -28,8 +28,16 @@ class WeightsController < ApplicationController
   # POST /weights.json
   def create
     @weight = Weight.new(weight_params)
+    # Already present weight? Update it!
     @rabbit = @weight.rabbit
     @cage   = @rabbit.cage
+
+    # already present weight on this date? update it
+    present_weight = @rabbit.weights.where(registered_on: @weight.registered_on).first
+    if present_weight
+      present_weight.value = @weight.value
+      @weight              = present_weight
+    end
 
     respond_to do |format|
       if @weight.save

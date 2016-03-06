@@ -30,12 +30,14 @@ class RabbitsController < ApplicationController
   # POST /rabbits.json
   def create
     @rabbit = Rabbit.new(rabbit_params)
+    @cage   = @rabbit.cage
 
     respond_to do |format|
       if @rabbit.save
         format.html { redirect_to cage_path(@rabbit.cage), notice: 'Coniglio creato con successo.' }
         format.json { render :show, status: :created, location: @rabbit }
       else
+        puts @rabbit.errors.full_messages
         format.html { render :new }
         format.json { render json: @rabbit.errors, status: :unprocessable_entity }
       end

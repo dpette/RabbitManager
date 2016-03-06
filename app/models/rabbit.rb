@@ -82,7 +82,7 @@ class Rabbit < ActiveRecord::Base
   end
 
   def list_item_title
-    name_or_position
+    name
   end
 
   def secondary_infos

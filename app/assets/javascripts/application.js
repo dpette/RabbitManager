@@ -25,3 +25,10 @@ dataConfirmModal.setDefaults({
   commit: 'Conferma',
   cancel: 'Annulla'
 });
+
+$(function(){
+  $('.table.table-clickable-row > tbody > tr').on("click", function() {
+    // $(this).find("a").first().click();
+    window.location = $(this).find("a").first().attr("href")
+  });
+})
