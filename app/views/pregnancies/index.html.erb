@@ -32,7 +32,7 @@
             <td><%= pregnancy.ending_at.strftime("%d/%m") %></td>
             <td><%= pregnancy.rabbits.size %></td>
           <% end %>
-          <td><%= icon_link_to "edit", edit_pregnancy_path(pregnancy) %></td>
+          <td><%= icon_link_to "chevron_right", edit_pregnancy_path(pregnancy) %></td>
         </tr>
       <% end %>
     <% end %>

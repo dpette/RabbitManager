@@ -11,8 +11,9 @@
           <!-- <div class="least-content">15m</div> -->
           <h4 class="list-group-item-heading"><%= pluralize(rabbit.age, "giorno", "giorni") %></h4>
 
+
           <% if rabbit.last_weight.present? %>
-            <p class="list-group-item-text">Ultimo peso <%= rabbit.last_weight %></p>
+            <p class="list-group-item-text"><%= number_with_precision rabbit.last_weight, precision: 3 %> Kg</p>
           <% else %>
             <p class="list-group-item-text">Nessun peso registrato</p>
           <% end %>

@@ -2,7 +2,7 @@ class MotherRabbit < Rabbit
 
   validates :gender,     inclusion: { in: %w(female) }, allow_nil: false
 
-  has_many :pregnancies, :class_name => "Pregnancy", :foreign_key => "rabbit_id", dependent: :destroy
+  has_many :pregnancies, :class_name => "Pregnancy", :foreign_key => "rabbit_id"#, dependent: :destroy
 
   after_initialize :set_gender
 

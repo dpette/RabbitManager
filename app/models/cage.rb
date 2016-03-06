@@ -52,7 +52,7 @@ class Cage < ActiveRecord::Base
 
   def list_item_heading
     if self.rabbits.any?
-      "#{rabbits_size} conigli presenti"
+      "#{rabbits_size} conigli"
     else
       "Gabbia vuota"
     end

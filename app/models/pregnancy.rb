@@ -5,6 +5,8 @@ class Pregnancy < ActiveRecord::Base
   validates :starting_at, presence: true
   validates :rabbit_id, presence: true
 
+  validate :avoid_intersections
+
   belongs_to :rabbit
   has_many :rabbits, dependent: :destroy
 
@@ -62,5 +64,15 @@ class Pregnancy < ActiveRecord::Base
       self.rabbits.update_all(birth_date: self.ending_at) if self.ending_at_changed?
     end
 
+
+    def avoid_intersections
+      pregnancies = self.rabbit.pregnancies.where.not(id: self.id)
+
+      if pregnancies.where("starting_at < ? AND (ending_at > ? OR ending_at IS NULL)", self.starting_at, self.starting_at).any?
+        self.errors.add(:starting_at, "non può essere durante un'altra gravidanza")
+      elsif self.ending_at && pregnancies.where("starting_at < ? AND (ending_at > ? OR ending_at IS NULL)", self.ending_at, self.ending_at).any?
+        self.errors.add(:ending_at, "non può essere durante un'altra gravidanza")
+      end
+    end
 
 end

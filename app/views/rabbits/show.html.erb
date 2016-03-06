@@ -50,11 +50,8 @@
   <% end %>
   <a href="<%= edit_rabbit_path(@rabbit, fields: [:notes]) %>" class="list-group-item">
     <div class="row-content">
-      <% if @rabbit.notes.present? %>
-        <p class="list-group-item-text notes"><%= @rabbit.notes.capitalize %></p>
-      <% else %>
-        <h4 class="list-group-item-heading">Note</h4>
-      <% end %>
+      <h4 class="list-group-item-heading">Note</h4>
+      <p class="list-group-item-text notes"><%= @rabbit.notes.to_s %></p>
       <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
     </div>
   </a>
@@ -62,7 +59,7 @@
 </div>
 
 <%= link_to "Pesa", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
-<%#= link_to "Sposta", available_cages_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
+<%= link_to "Sposta", available_cages_rabbit_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
 <%= link_to "Uccidi", kill_rabbit_path(@rabbit), method: :put, class: "btn btn-primary btn-block btn-lg", data: { confirm: "I conigli non ritornano più in vita"} %>
 <% if @rabbit.mother? %>
   <% if !@rabbit.pregnant? %>

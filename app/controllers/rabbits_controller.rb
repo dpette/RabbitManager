@@ -1,4 +1,7 @@
 class RabbitsController < ApplicationController
+  before_filter :authenticate_user!#, except: [:index]
+
+
   before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill, :birth, :new_birth, :new_conception, :conception, :edit_notes, :available_cages, :move]
   before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception, :edit_notes, :available_cages, :move]
 
@@ -87,9 +90,6 @@ class RabbitsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to cage_path(@rabbit.cage)}
     end
-  end
-
-  def edit_notes
   end
 
   def new_conception

@@ -1,4 +1,7 @@
 class WeightsController < ApplicationController
+  before_filter :authenticate_user!#, except: [:index]
+
+
   before_action :set_weight, only: [:show, :edit, :update, :destroy]
   before_action :set_rabbit, only: [:show, :edit, :new, :index, :destroy, :update]
   before_action :set_cage, only: [:show, :edit, :new, :index, :destroy, :update]

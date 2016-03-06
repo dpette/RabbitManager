@@ -27,8 +27,7 @@ dataConfirmModal.setDefaults({
 });
 
 $(function(){
-  $('.table.table-clickable-row > tbody > tr').on("click", function() {
-    // $(this).find("a").first().click();
+  $(document).on("click", '.table.table-clickable-row > tbody > tr', function(e){
     window.location = $(this).find("a").first().attr("href")
   });
 })
