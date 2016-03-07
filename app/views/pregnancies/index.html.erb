@@ -4,9 +4,7 @@
 
 <h1>Gravidanze per <%= @rabbit.name_or_position %></h1>
 
-<% if !@rabbit.in_progress_pregnancy %>
-  <%= icon_link_to "add", new_rabbit_pregnancy_path(@rabbit), class: "btn btn-primary btn-fab btn-raised btn-block add-weight" %>
-<% end %>
+<%= icon_link_to "add", new_rabbit_pregnancy_path(@rabbit), class: "btn btn-primary btn-fab btn-raised btn-block add-weight" %>
 
 
 <table class="table table-hover table-clickable-row">
