@@ -37,7 +37,7 @@ class MotherhoodCage < Cage
 
   def list_item_text
     if self.rabbits_size > 0
-      "#{cage.rabbits_size} cuccioli da #{cage.rabbits.last.age} age"
+      "#{self.rabbits_size} cuccioli da #{self.rabbits.last.age} giorni"
     else
       "0 cuccioli"
     end
