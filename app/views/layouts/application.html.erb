@@ -30,7 +30,7 @@
   <meta name="msapplication-TileColor" content="#FFFFFF">
   <meta name="msapplication-TileImage" content="<%= asset_path "/assets/favicons/favicon-144.png" %>">
   <meta name="msapplication-config" content="<%= asset_path "/assets/favicons/browserconfig.xml" %>">
-  <!-- <meta name="theme-color" content="<%= content_for?(:theme_color) ? yield(:theme_color) : "#4CAF50" %>"> -->
+  <meta name="theme-color" content="<%= content_for?(:theme_color) ? yield(:theme_color) : "#4CAF50" %>">
   <!-- <meta name="theme-color" content="black"> -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,7 +40,7 @@
 
   <%= csrf_meta_tags %>
 </head>
-<body class="<%= @cage.try(:model_name).try(:element) %>">
+<body class="<%= @cage.try(:model_name).try(:element) %>"  oncontextmenu="return false;">
 
 
 <%= render "layouts/navbar" %>
@@ -52,6 +52,12 @@
   <!-- http://codepen.io/zavoloklom/pen/dIgco -->
 
 </div>
+
+<script type="text/javascript">
+  $(function(){
+    $("meta[name=theme-color]").attr("content", "<%= color_by_cage @cage %>");
+  })
+</script>
 
 </body>
 </html>

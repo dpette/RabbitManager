@@ -1,24 +1,42 @@
-<div class="list-group">
+<%= bootstrap_form_tag(url: "#") do %>
+  <div class="list-group rabbits">
 
-  <% rabbits.each_with_index do |rabbit, index| %>
-    <% if rabbit %>
-      <%= link_to rabbit_path(rabbit), class: "list-group-item" do %>
-        <div class="row-action-primary row-action-gender-<%= rabbit.gender %>">
-          <i class="code"><%= index + 1 %></i>
-        </div>
-        <div class="row-content">
-          <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
-          <!-- <div class="least-content">15m</div> -->
-          <h4 class="list-group-item-heading"><%= pluralize(rabbit.age, "giorno", "giorni") %></h4>
+    <% rabbits.each_with_index do |rabbit, index| %>
+      <% if rabbit %>
+        <%= link_to rabbit_path(rabbit), class: "list-group-item link-item",  id: "rabbit-#{rabbit.id}-link", data: { rabbit_id: rabbit.id } do %>
+          <div class="row-action-primary row-action-gender-<%= rabbit.gender %>">
+            <i class="code"><%= index + 1 %></i>
+          </div>
+          <div class="row-content">
+            <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+            <!-- <div class="least-content">15m</div> -->
+            <h4 class="list-group-item-heading"><%= pluralize(rabbit.age, "giorno", "giorni") %></h4>
 
 
-          <% if rabbit.last_weight.present? %>
-            <p class="list-group-item-text"><%= number_with_precision rabbit.last_weight, precision: 3 %> Kg</p>
-          <% else %>
+            <% if rabbit.last_weight.present? %>
+              <p class="list-group-item-text"><%= number_with_precision rabbit.last_weight, precision: 3 %> Kg</p>
+            <% else %>
+              <p class="list-group-item-text">Nessun peso registrato</p>
+            <% end %>
+          </div>
+        <% end %>
+
+        <label class="list-group-item checkbox-item" id="rabbit-<%= rabbit.id %>-checkbox">
+          <div class="row-action-primary checkbox">
+            <label>
+              <input type="checkbox">
+              <span class="checkbox-material">
+                <span class="check"></span>
+             </span>
+            </label>
+          </div>
+          <div class="row-content">
+            <h4 class="list-group-item-heading"><%= pluralize(rabbit.age, "giorno", "giorni") %></h4>
             <p class="list-group-item-text">Nessun peso registrato</p>
-          <% end %>
-        </div>
+          </div>
+        </label>
       <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+  <%= submit_tag "Sposta", class: "btn btn-primary btn-raised btn-lg btn-block btn-multiselect" %>
+<% end %>

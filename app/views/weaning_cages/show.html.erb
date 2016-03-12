@@ -12,4 +12,6 @@
 <% end %>
 
 <h1>Gabbia <%= @cage.code %></h1>
-<h3><%= @cage.rabbits.size %> conigli</h3>
+<h3><%= pluralize(@cage.rabbits.size, "coniglio", "conigli") %></h3>
+<%= render "rabbits/list", rabbits: @cage.rabbits %>
+

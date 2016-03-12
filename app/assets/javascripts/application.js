@@ -26,8 +26,55 @@ dataConfirmModal.setDefaults({
   cancel: 'Annulla'
 });
 
+
 $(function(){
+  // clickable table entire row
   $(document).on("click", '.table.table-clickable-row > tbody > tr', function(e){
     window.location = $(this).find("a").first().attr("href")
   });
+
+  $(document).on("click", "#cancel-multiselect-button", function(){
+    $(this).closest("li").remove();
+    $(".nav.navbar-nav li").show();
+    disableMultiselect();
+  });
+
+  var pressTimer, longPress
+
+  function enableMultiselect() {
+    $(".link-item").hide();
+    $(".checkbox-item").css({display: "block"});
+    $(".btn-multiselect").show();
+    $(".nav.navbar-nav li").hide();
+    $(".nav.navbar-nav.navbar-left").append("<li><a href='javascript:void(0)' id='cancel-multiselect-button'><i class='material-icons'>close</i></a></li>");
+  }
+
+  function disableMultiselect() {
+    $(".link-item").show();
+    $(".checkbox-item").css({display: "none"});
+    $(".btn-multiselect").hide();
+    longPress = false
+  }
+
+  $(document).on("mouseup", ".list-group.rabbits a", function(){
+    console.log("mouseup")
+    clearTimeout(pressTimer)
+    return false;
+  }).on("mousedown", ".list-group.rabbits a", function(){
+    console.log("mousedown")
+    var rabbitId = $(this).data("rabbitId")
+    pressTimer = window.setTimeout(function() {
+      console.log("longpress")
+      enableMultiselect();
+      longPress = true
+      return false;
+    },600)
+  }).on("click", ".list-group.rabbits a", function(){
+    console.log("click, longpress? " + longPress)
+    return !longPress
+    // if(longPress)
+    //   return false
+    // else
+    //   return true
+  })
 })

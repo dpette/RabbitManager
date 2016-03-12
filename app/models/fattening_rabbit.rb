@@ -4,4 +4,9 @@ class FatteningRabbit < Rabbit
     "#{super}, cella #{self.compartment.code}"
   end
 
+
+  def allowed_cage_types
+    [FatteningCage]
+  end
+
 end

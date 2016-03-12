@@ -1,0 +1,2 @@
+module WeaningRabbitsHelper
+end

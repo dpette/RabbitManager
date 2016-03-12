@@ -19,6 +19,12 @@ body { padding-top: 70px; }
 
 .navbar, .navbar-default.navbar {
   background-color: $primary-color;
+  height: 56px;
+
+  @media (min-width: 1200px) {
+    height: 66px;
+  }
+
 
   .nav.navbar-nav {
     margin: 0 -15px;
@@ -273,12 +279,38 @@ body.race_cage {
   }
 }
 
+.btn-multiselect {
+  display: none;
+}
+
 .list-group .list-group-item {
   padding: 0;
 
   @media (min-width: 768px) {
     padding: 0 16px;
   }
+
+  &.checkbox-item {
+    display: none;
+    font-weight: 300;
+    color: #555;
+
+    .checkbox {
+
+      margin-top: 0;
+      margin-bottom: 0;
+
+      .checkbox-material {
+        left: 10px;
+
+        &:before {
+          left: 0;
+        }
+      }
+    }
+
+  }
+
 
 
   i {

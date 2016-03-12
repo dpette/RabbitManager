@@ -1,9 +1,6 @@
 class Cage < ActiveRecord::Base
 
   belongs_to :farm
-  has_many :compartments
-
-  has_many :rabbits, as: :container
 
   scope :fattening,  -> { where(type: "FatteningCage") }
   scope :motherhood, -> { where(type: "MotherhoodCage") }
@@ -39,7 +36,6 @@ class Cage < ActiveRecord::Base
   #   end
   # end
 
-
   def set_code
     if farm.present? && code.nil?
       self.code = farm.cages.last.try(:code).try(:next)
@@ -64,6 +60,9 @@ class Cage < ActiveRecord::Base
     else
       "Non ci sono conigli in questa gabbia"
     end
+  end
+
+  def allowed_rabbits
   end
 
 

@@ -5,7 +5,6 @@ class FatteningCage < Cage
 
   attr_accessor :compartments_size
 
-
   def compartments_size
     self.compartments.size
   end
@@ -26,5 +25,18 @@ class FatteningCage < Cage
       end
     end
   end
+
+  def list_item_heading
+    # if self.rabbits.any?
+    #   "#{rabbits_size} conigli"
+    # else
+    "Gabbia vuota"
+    # end
+  end
+
+  def list_item_text
+    "Non ci sono conigli in questa gabbia"
+  end
+
 
 end

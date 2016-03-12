@@ -57,8 +57,8 @@ class Rabbit < ActiveRecord::Base
     )
   end
 
-  def move new_cage
-    self.update_attributes(container_id: new_cage.id, container_type: new_cage.type)
+  def move new_cage, new_compartment
+    self.update_attributes(container_id: new_cage.id, container_type: new_cage.type, type: "WeaningRabbit")
   end
 
   def mother?

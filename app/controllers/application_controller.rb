@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :sign_in_by_param
+  before_filter :set_farm
 
   protected
 
@@ -27,6 +28,12 @@ class ApplicationController < ActionController::Base
 
     def class_instance_name_by_controller
       params[:controller].singularize
+    end
+
+    def set_farm
+      if current_user
+        @farm ||= current_user.farms.first
+      end
     end
 
 end
