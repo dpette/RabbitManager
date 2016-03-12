@@ -46,6 +46,8 @@ class MotherhoodCage < Cage
     end
   end
 
-
+  def self.allowed_rabbit_class
+    BabyRabbit
+  end
 
 end

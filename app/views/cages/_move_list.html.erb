@@ -1,9 +1,21 @@
+<%
+
+
+if defined?(rabbit)
+  path = "/rabbits/#{rabbit.id}/cages/:cage_id/move"
+end
+if defined?(rabbits)
+  path = "/rabbits/cages/:cage_id/move?rabbits_ids=#{rabbits.pluck(:id)}"
+end
+
+ %>
+
 <% if cages && cages.any? %>
   <h2><%= cages.model_name.human %> <small><%= pluralize(cages.size, 'gabbia', 'gabbie') %></small></h2>
 
   <div class="list-group">
     <% cages.each do |cage| %>
-      <%= link_to move_rabbit_path(@rabbit, new_cage_id: cage.id), class: "list-group-item", method: "PUT" do %>
+      <%= link_to path.gsub(":cage_id", cage.id.to_s), class: "list-group-item", method: "PUT" do %>
         <div class="row-action-primary row-action-<%= cage.model_name.element %>">
           <i class="cage"><%= cage.code %></i>
         </div>

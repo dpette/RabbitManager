@@ -21,6 +21,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_available_cages rabbits
+    rabbits = [rabbits] if rabbits.kind_of? Rabbit
+    rabbits.each do |rabbit|
+      rabbit.can_become_classes.each do |can_become_class|
+        # wanna_be_rabbit = @rabbit.becomes(can_become_class)
+
+        puts ("can_become_class => #{can_become_class}")
+
+        instance_variable_set(
+          "@#{can_become_class.allowed_cage_type.model_name.plural}",
+          can_become_class.allowed_cage_type.where(farm_id: @farm.id).where.not(id: rabbit.cage.id)
+        )
+      end
+    end
+  end
+
+
   protected
     def class_name_by_controller
       params[:controller].singularize.classify

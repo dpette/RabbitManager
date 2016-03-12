@@ -79,54 +79,47 @@ class RabbitsController < ApplicationController
     end
   end
 
-  def new_birth
-  end
+  # def new_birth
+  # end
 
-  def birth
-    size       = params[:size].to_i
-    birth_date = Date.new(params["birth_date(1i)"].to_i, params["birth_date(2i)"].to_i, params["birth_date(3i)"].to_i)
-    @rabbit.giving_birth size, birth_date
+  # def birth
+  #   size       = params[:size].to_i
+  #   birth_date = Date.new(params["birth_date(1i)"].to_i, params["birth_date(2i)"].to_i, params["birth_date(3i)"].to_i)
+  #   @rabbit.giving_birth size, birth_date
 
-    respond_to do |format|
-      format.html { redirect_to cage_path(@rabbit.cage)}
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to cage_path(@rabbit.cage)}
+  #   end
+  # end
 
-  def new_conception
-    @conceptioners = RaceRabbit.where(container_id: current_user.farms.first.cages.pluck(:id))
-  end
+  # def new_conception
+  #   @conceptioners = RaceRabbit.where(container_id: current_user.farms.first.cages.pluck(:id))
+  # end
 
-  def conception
-    conceptioner    = Rabbit.find_by(id: params[:conceptioner_id])
-    conceptioned_on = Date.new(params["conceptioned_on(1i)"].to_i, params["conceptioned_on(2i)"].to_i, params["conceptioned_on(3i)"].to_i)
-    logger.info { "conceptioned_on #{conceptioned_on}" }
-    @rabbit.make_conception conceptioner, conceptioned_on
+  # def conception
+  #   conceptioner    = Rabbit.find_by(id: params[:conceptioner_id])
+  #   conceptioned_on = Date.new(params["conceptioned_on(1i)"].to_i, params["conceptioned_on(2i)"].to_i, params["conceptioned_on(3i)"].to_i)
+  #   logger.info { "conceptioned_on #{conceptioned_on}" }
+  #   @rabbit.make_conception conceptioner, conceptioned_on
 
-    respond_to do |format|
-      format.html { redirect_to rabbit_path(@rabbit)}
-    end
+  #   respond_to do |format|
+  #     format.html { redirect_to rabbit_path(@rabbit)}
+  #   end
+  # end
+
+  def available_cages_for_group
+    @rabbits = Rabbit.where(id: params[:rabbits_ids])
+    @cage    = @rabbits.first.cage
+    set_available_cages @rabbits
   end
 
   def available_cages
-    set_available_cages
+    set_available_cages @rabbit
   end
 
   def available_compartments
   end
 
-  def move
-    @new_cage        = Cage.find(params[:new_cage_id])
-    @new_compartment = Cage.find(params[:new_compartment_id]) if params[:new_compartment_id]
-
-    if @rabbit.move @new_cage, @new_compartment
-      redirect_to cage_path(@new_cage), notice: "Coniglio spostato con successo"
-    else
-      set_available_cages
-      puts @rabbit.errors.full_messages
-      flash[:error] = @rabbit.errors.full_messages.to_sentence
-      render :available_cages
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -152,18 +145,5 @@ class RabbitsController < ApplicationController
       @rabbit_type = class_instance_name_by_controller
     end
 
-    def set_available_cages
-      @rabbit.can_become_classes.each do |can_become_class|
-        puts "can_become_class => #{can_become_class}"
-        wanna_be_rabbit = @rabbit.becomes(can_become_class)
 
-        wanna_be_rabbit.allowed_cage_types.each do |allowed_cage_type|
-          puts "size => #{allowed_cage_type.where(farm_id: @farm.id).size}"
-          instance_variable_set(
-            "@#{allowed_cage_type.model_name.plural}",
-            allowed_cage_type.where(farm_id: @farm.id).where.not(id: @rabbit.cage.id)
-          )
-        end
-      end
-    end
 end

@@ -4,7 +4,7 @@
 
 <h1>Scegli la Gabbia</h1>
 
-<%= render "cages/move_list", cages: @fattening_cages %>
-<%= render "cages/move_list", cages: @motherhood_cages %>
-<%= render "cages/move_list", cages: @weaning_cages %>
-<%= render "cages/move_list", cages: @race_cages %>
+<%= render "cages/move_list", cages: @fattening_cages,  rabbit: @rabbit %>
+<%= render "cages/move_list", cages: @motherhood_cages, rabbit: @rabbit %>
+<%= render "cages/move_list", cages: @weaning_cages,    rabbit: @rabbit %>
+<%= render "cages/move_list", cages: @race_cages,       rabbit: @rabbit %>

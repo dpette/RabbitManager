@@ -5,8 +5,8 @@ class FatteningRabbit < Rabbit
   end
 
 
-  def allowed_cage_types
-    [FatteningCage]
+  def self.allowed_cage_type
+    FatteningCage
   end
 
 end

@@ -1,4 +1,4 @@
-<%= bootstrap_form_tag(url: "#") do %>
+<%= bootstrap_form_tag(url: available_cages_for_group_rabbits_path, method: "GET") do %>
   <div class="list-group rabbits">
 
     <% rabbits.each_with_index do |rabbit, index| %>
@@ -24,7 +24,7 @@
         <label class="list-group-item checkbox-item" id="rabbit-<%= rabbit.id %>-checkbox">
           <div class="row-action-primary checkbox">
             <label>
-              <input type="checkbox">
+              <%= check_box_tag 'rabbits_ids[]', rabbit.id -%>
               <span class="checkbox-material">
                 <span class="check"></span>
              </span>

@@ -47,6 +47,19 @@ class MotherRabbit < Rabbit
     infos
   end
 
+  def self.allowed_cage_type
+    WeaningCage
+  end
+
+
+  def can_become_classes
+    c_b_c = [MotherRabbit]
+    c_b_c << FatteningRabbit if self.age > 60
+
+    c_b_c
+  end
+
+
 
   private
     def set_gender

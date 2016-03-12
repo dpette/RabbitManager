@@ -65,5 +65,18 @@ class Cage < ActiveRecord::Base
   def allowed_rabbits
   end
 
+  def move rabbit
+    weaning_rabbit                = rabbit.becomes(self.allowed_rabbit_class)
+    weaning_rabbit.type           = self.allowed_rabbit_class.to_s
+    weaning_rabbit.container_type = "Cage"
+    weaning_rabbit.container_id   = self.id
+    weaning_rabbit.save
+  end
+
+  def allowed_rabbit_class
+    self.class.allowed_rabbit_class
+  end
+
+
 
 end

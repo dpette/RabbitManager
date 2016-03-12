@@ -1,8 +1,7 @@
 class CagesController < ApplicationController
   before_filter :authenticate_user!#, except: [:index]
 
-  before_action :set_cage, only: [:show, :edit, :update, :destroy]
-  before_action :set_farm, only: [:index, :new]
+  before_action :set_cage, only: [:show, :edit, :update, :destroy, :move]
 
 
   before_filter :set_cage_type
@@ -71,6 +70,37 @@ class CagesController < ApplicationController
     end
   end
 
+  def move
+    if params[:rabbits_ids]
+      @rabbits    = Rabbit.where(id: JSON.parse(params[:rabbits_ids]))
+      puts "@rabbits => #{@rabbits.size}"
+      last_rabbit = nil
+      move_result = true
+      @rabbits.each do |rabbit|
+        last_rabbit   = rabbit
+        move_result   = @cage.move(last_rabbit)
+        break if !move_result
+      end
+    else
+      @rabbit = last_rabbit = Rabbit.find(params[:rabbit_id])
+      move_result = @cage.move @rabbit
+    end
+
+
+    if move_result
+      if @rabbits
+        notice = "Coniglii spostati con successo"
+      else
+        notice = "Coniglio spostato con successo"
+      end
+      redirect_to cage_path(@cage), notice: notice
+    else
+      # set_available_cages @rabbits || @rabbit
+      # flash[:error] = last_rabbit.errors.full_messages.to_sentence
+      render :available_cages
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cage
@@ -83,13 +113,13 @@ class CagesController < ApplicationController
         permit(:name, :code, :farm_id, :type, :compartments_size)
     end
 
-    def set_farm
-      if current_user.farms.size > 1
-        @farm = current_user.farms.find(params[:farm_id])
-      else
-        @farm = current_user.farms.first
-      end
-    end
+    # def set_farm
+    #   if current_user.farms.size > 1
+    #     @farm = current_user.farms.find(params[:farm_id])
+    #   else
+    #     @farm = current_user.farms.first
+    #   end
+    # end
 
     def set_cage_type
       @cage_type = class_instance_name_by_controller
