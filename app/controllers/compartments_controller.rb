@@ -1,5 +1,5 @@
 class CompartmentsController < ApplicationController
-  before_action :set_compartment, only: [:show, :edit, :update, :destroy]
+  before_action :set_compartment, only: [:show, :edit, :update, :destroy, :move]
 
   # GET /compartments
   # GET /compartments.json
@@ -19,6 +19,25 @@ class CompartmentsController < ApplicationController
 
   # GET /compartments/1/edit
   def edit
+  end
+
+  def available
+    @cage         = Cage.find(params[:cage_id])
+    @rabbit       = Rabbit.find(params[:rabbit_id])
+    @compartments = @cage.compartments
+  end
+
+  def move
+    @rabbit = Rabbit.find(params[:rabbit_id])
+    @cage   = Cage.find(params[:cage_id])
+
+    if @compartment.move @rabbit
+      redirect_to cage_path(@cage), notice: "Coniglio spostato con successo"
+    else
+      @compartments = @cage.compartments
+      flash[:error] = @rabbit.errors.full_messages.to_sentence
+      render :available
+    end
   end
 
   # POST /compartments

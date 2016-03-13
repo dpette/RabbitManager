@@ -66,11 +66,11 @@ class Cage < ActiveRecord::Base
   end
 
   def move rabbit
-    weaning_rabbit                = rabbit.becomes(self.allowed_rabbit_class)
-    weaning_rabbit.type           = self.allowed_rabbit_class.to_s
-    weaning_rabbit.container_type = "Cage"
-    weaning_rabbit.container_id   = self.id
-    weaning_rabbit.save
+    wanna_be_rabbit                = rabbit.becomes(self.allowed_rabbit_class)
+    wanna_be_rabbit.type           = self.allowed_rabbit_class.to_s
+    wanna_be_rabbit.container_type = "Cage"
+    wanna_be_rabbit.container_id   = self.id
+    wanna_be_rabbit.save
   end
 
   def allowed_rabbit_class

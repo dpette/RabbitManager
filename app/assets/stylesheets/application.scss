@@ -405,3 +405,7 @@ td.icon-column {
 small {
   color: #777777;
 }
+
+a[disabled] {
+  pointer-events: none;
+}

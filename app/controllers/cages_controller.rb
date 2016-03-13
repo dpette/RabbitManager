@@ -1,7 +1,7 @@
 class CagesController < ApplicationController
   before_filter :authenticate_user!#, except: [:index]
 
-  before_action :set_cage, only: [:show, :edit, :update, :destroy, :move]
+  before_action :set_cage, only: [:show, :edit, :update, :destroy, :move, :move_for_group]
 
 
   before_filter :set_cage_type
@@ -70,34 +70,49 @@ class CagesController < ApplicationController
     end
   end
 
+  def available_for_group
+    @rabbits = Rabbit.where(id: params[:rabbits_ids])
+    @cage    = @rabbits.first.cage
+    set_available_cages @rabbits
+  end
+
+  def available
+    @rabbit = Rabbit.find(params[:rabbit_id])
+    @cage   = @rabbit.cage
+
+    set_available_cages @rabbit
+  end
+
+
   def move
-    if params[:rabbits_ids]
-      @rabbits    = Rabbit.where(id: JSON.parse(params[:rabbits_ids]))
-      puts "@rabbits => #{@rabbits.size}"
-      last_rabbit = nil
-      move_result = true
-      @rabbits.each do |rabbit|
-        last_rabbit   = rabbit
-        move_result   = @cage.move(last_rabbit)
-        break if !move_result
-      end
+    @rabbit = Rabbit.find(params[:rabbit_id])
+
+    if @cage.move @rabbit
+      redirect_to cage_path(@cage), notice: "Coniglio spostato con successo"
     else
-      @rabbit = last_rabbit = Rabbit.find(params[:rabbit_id])
-      move_result = @cage.move @rabbit
+      set_available_cages @rabbit
+      flash[:error] = @rabbit.errors.full_messages.to_sentence
+      render :available
+    end
+  end
+
+  def move_for_group
+    @rabbits = Rabbit.where(id: JSON.parse(params[:rabbits_ids]))
+    last_rabbit = nil
+    move_result = true
+
+    @rabbits.each do |rabbit|
+      last_rabbit   = rabbit
+      move_result   = @cage.move(last_rabbit)
+      break if !move_result
     end
 
-
     if move_result
-      if @rabbits
-        notice = "Coniglii spostati con successo"
-      else
-        notice = "Coniglio spostato con successo"
-      end
-      redirect_to cage_path(@cage), notice: notice
+      redirect_to cage_path(@cage), notice: "Conigli spostati con successo"
     else
-      # set_available_cages @rabbits || @rabbit
-      # flash[:error] = last_rabbit.errors.full_messages.to_sentence
-      render :available_cages
+      set_available_cages @rabbits
+      flash[:error] = last_rabbit.errors.full_messages.to_sentence
+      render :available_for_group
     end
   end
 
@@ -124,4 +139,22 @@ class CagesController < ApplicationController
     def set_cage_type
       @cage_type = class_instance_name_by_controller
     end
+
+    def set_available_cages rabbits
+      rabbits = [rabbits] if rabbits.kind_of? Rabbit
+      rabbits.each do |rabbit|
+        rabbit.can_become_classes.each do |can_become_class|
+          # wanna_be_rabbit = @rabbit.becomes(can_become_class)
+
+          puts ("can_become_class => #{can_become_class}")
+
+          instance_variable_set(
+            "@#{can_become_class.allowed_cage_type.model_name.plural}",
+            can_become_class.allowed_cage_type.where(farm_id: @farm.id).where.not(id: rabbit.cage.id)
+          )
+        end
+      end
+    end
+
+
 end

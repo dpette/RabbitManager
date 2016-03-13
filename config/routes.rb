@@ -16,6 +16,17 @@ Rails.application.routes.draw do
     resources :weights, only: [:new, :index]
     resources :pregnancies, only: [:new, :index]
     resources :cages do
+      resources :compartments do
+        collection do
+          get :available
+        end
+        member do
+          put :move
+        end
+      end
+      collection do
+        get :available
+      end
       member do
         put :move
       end
@@ -27,13 +38,15 @@ Rails.application.routes.draw do
       get :new_conception
       post :conception
       get :edit_notes
-      get :available_cages
     end
     collection do
-      get :available_cages_for_group
       resources :cages do
+        collection do
+          get :available_for_group
+        end
         member do
           put :move
+          put :move_for_group
         end
       end
     end

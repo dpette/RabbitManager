@@ -1,0 +1,9 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", cage_path(@cage) %></li>
+<% end %>
+
+<h1>Scegli la Gabbia</h1>
+
+<%= render "fattening_cages/move_list", cages: @fattening_cages,  rabbits: @rabbits if @rabbits.size == 1 %>
+<%= render "move_list",                 cages: @motherhood_cages, rabbits: @rabbits %>
+<%= render "move_list",                 cages: @weaning_cages,    rabbits: @rabbits %>

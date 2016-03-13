@@ -107,15 +107,6 @@ class RabbitsController < ApplicationController
   #   end
   # end
 
-  def available_cages_for_group
-    @rabbits = Rabbit.where(id: params[:rabbits_ids])
-    @cage    = @rabbits.first.cage
-    set_available_cages @rabbits
-  end
-
-  def available_cages
-    set_available_cages @rabbit
-  end
 
   def available_compartments
   end

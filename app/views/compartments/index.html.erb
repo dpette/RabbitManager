@@ -1,4 +1,8 @@
-<h1>Listing Compartments</h1>
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", cages_path %></li>
+<% end %>
+
+<h1>Celle per Gabbia <%= @cage.code %></h1>
 
 
 <div class="list-group">

@@ -9,4 +9,13 @@ class FatteningRabbit < Rabbit
     FatteningCage
   end
 
+  def list_item_heading
+    "miao"
+  end
+
+  def list_item_text
+    "ciao"
+  end
+
+
 end

@@ -27,15 +27,11 @@ class FatteningCage < Cage
   end
 
   def list_item_heading
-    # if self.rabbits.any?
-    #   "#{rabbits_size} conigli"
-    # else
-    "Gabbia vuota"
-    # end
+    "#{self.compartments.size} celle"
   end
 
   def list_item_text
-    "Non ci sono conigli in questa gabbia"
+    "#{self.compartments.empty.size} celle libere"
   end
 
 

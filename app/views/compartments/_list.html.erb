@@ -1,36 +1,26 @@
 <div class="list-group">
 
   <% compartments.each do |compartment| %>
-    <% if compartment.rabbit %>
-      <%= link_to rabbit_path(compartment.rabbit), class: "list-group-item" do %>
-        <div class="row-action-primary row-action-gender-<%= compartment.rabbit.gender %>">
-          <!-- <i class="material-icons"><%= compartment.code %></i> -->
-          <i class="code"><%= compartment.code %></i>
-        </div>
-        <div class="row-content">
+    <%
+      if compartment.rabbit
+        path = rabbit_path(compartment.rabbit)
+      else
+        path = "/#"
+      end
+    %>
+    <%= link_to path, class: "list-group-item", disabled: compartment.rabbit.nil? do %>
+      <div class="row-action-primary row-action-gender-<%= compartment.rabbit.try(:gender) %>">
+        <!-- <i class="material-icons"><%= compartment.code %></i> -->
+        <i class="code"><%= compartment.code %></i>
+      </div>
+      <div class="row-content">
+        <% if  compartment.rabbit %>
           <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
-          <!-- <div class="least-content">15m</div> -->
-          <h4 class="list-group-item-heading"><%= pluralize(compartment.rabbit_age, "giorno", "giorni") %></h4>
+        <% end %>
+        <!-- <div class="least-content">15m</div> -->
+        <h4 class="list-group-item-heading"><%= compartment.list_item_heading %></h4>
 
-          <% if compartment.rabbit_last_weight.present? %>
-            <p class="list-group-item-text">Ultimo peso <%= compartment.rabbit_last_weight.value %></p>
-          <% else %>
-            <p class="list-group-item-text">Nessun peso registrato</p>
-          <% end %>
-        </div>
-      <% end %>
-    <% else %>
-      <div class="list-group-item">
-        <div class="row-action-primary">
-          <i class="code"><%= compartment.code %></i>
-        </div>
-        <div class="row-content">
-          <!-- <div class="action-secondary">
-            <i class="material-icons"></i>
-          </div> -->
-          <h4 class="list-group-item-heading list-group-item-heading-empty">Vuota</h4>
-        </div>
-
+        <p class="list-group-item-text"><%= compartment.list_item_text %></p>
       </div>
     <% end %>
   <% end %>

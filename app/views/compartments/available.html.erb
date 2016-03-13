@@ -1,0 +1,22 @@
+<% content_for :nav_left do  %>
+  <li><%= icon_link_to "arrow_back", available_rabbit_cages_path(@rabbit) %></li>
+<% end %>
+
+<h1>Celle per Gabbia <%= @cage.code %></h1>
+
+<div class="list-group">
+  <% @compartments.each do |compartment| %>
+    <%= link_to move_rabbit_cage_compartment_path(@rabbit, @cage, compartment), class: "list-group-item", disabled: compartment.rabbit.present? , method: "PUT" do %>
+      <div class="row-action-primary row-action-fattening">
+        <i class="code"><%= compartment.code %></i>
+      </div>
+      <div class="row-content">
+        <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+        <!-- <div class="least-content">15m</div> -->
+        <h4 class="list-group-item-heading"><%= compartment.list_item_heading %></h4>
+
+        <p class="list-group-item-text"><%= compartment.list_item_text %></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
