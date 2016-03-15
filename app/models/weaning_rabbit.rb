@@ -1,5 +1,16 @@
 class WeaningRabbit < Rabbit
 
+  MIN_AGE = 25
+  MAX_AGE = 100
+
+  def self.min_age
+    MIN_AGE
+  end
+
+  def self.min_age
+    MAX_AGE
+  end
+
   def self.allowed_cage_type
     WeaningCage
   end
@@ -12,5 +23,15 @@ class WeaningRabbit < Rabbit
 
     c_b_c
   end
+
+
+  def self.min_age
+    25
+  end
+
+  def self.max_age
+    100
+  end
+
 
 end

@@ -21,6 +21,37 @@ class Rabbit < ActiveRecord::Base
   scope :babies,     -> { where(type: "BabyRabbit") }
   scope :weaning,    -> { where(type: "WeaningRabbit") }
 
+  MIN_AGE = 0
+  MAX_AGE = 100000
+
+  def self.min_age
+    MIN_AGE
+  end
+
+  def self.max_age
+    MIN_AGE
+  end
+
+  def self.accept_gender? gender
+    true
+  end
+
+
+  def self.accept_age? age
+    age > self.min_age && age < self.max_age
+  end
+
+  def can_become_classes
+    c_b_c = []
+
+    [MotherRabbit, FatteningRabbit, RaceRabbit, BabyRabbit, WeaningRabbit].each do |rabbit_class|
+      if rabbit_class.accept_age?(self.age) && rabbit_class.accept_gender?(self.gender)
+        c_b_c << rabbit_class
+      end
+    end
+
+    c_b_c
+  end
 
   def age
     birth_date ? (Date.today - birth_date).to_i : 0

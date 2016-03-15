@@ -26,6 +26,10 @@ dataConfirmModal.setDefaults({
   cancel: 'Annulla'
 });
 
+document.oncontextmenu = function () {
+   return false;
+};
+
 
 $(function(){
   // clickable table entire row
@@ -72,9 +76,9 @@ $(function(){
   }).on("click", ".list-group.rabbits a", function(){
     console.log("click, longpress? " + longPress)
     return !longPress
-    // if(longPress)
-    //   return false
-    // else
-    //   return true
+  })
+
+  $(document).on("click", ".enable_multiselect", function() {
+    enableMultiselect()
   })
 })

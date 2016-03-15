@@ -6,6 +6,9 @@ class MotherRabbit < Rabbit
 
   after_initialize :set_gender
 
+  MIN_AGE = 120
+
+
   def position
     "Madre per #{self.cage.code}"
   end
@@ -52,13 +55,13 @@ class MotherRabbit < Rabbit
   end
 
 
-  def can_become_classes
-    c_b_c = [MotherRabbit]
-    c_b_c << FatteningRabbit if self.age > 60
-
-    c_b_c
+  def self.accept_gender? gender
+    gender == "female"
   end
 
+  def self.min_age
+    120
+  end
 
 
   private

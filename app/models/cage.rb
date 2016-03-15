@@ -77,6 +77,4 @@ class Cage < ActiveRecord::Base
     self.class.allowed_rabbit_class
   end
 
-
-
 end

@@ -31,6 +31,8 @@ class MotherhoodCage < Cage
   def title
     if self.mother && self.mother.name.present?
       self.mother.name
+    elsif self.mother.nil?
+      "Senza madre"
     else
       super
     end
@@ -39,6 +41,8 @@ class MotherhoodCage < Cage
   def list_item_text
     if self.rabbits_size > 0
       "#{self.rabbits_size} cuccioli da #{self.rabbits.last.age} giorni"
+    elsif self.mother.nil?
+      ""
     elsif self.mother.pregnant?
       "Incinta da #{self.mother.in_progress_pregnancy.days_from_start} giorni"
     else
@@ -49,5 +53,7 @@ class MotherhoodCage < Cage
   def self.allowed_rabbit_class
     BabyRabbit
   end
+
+
 
 end

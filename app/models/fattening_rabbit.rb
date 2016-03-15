@@ -1,5 +1,11 @@
 class FatteningRabbit < Rabbit
 
+
+
+  def self.min_age
+    70
+  end
+
   def position
     "#{super}, cella #{self.compartment.code}"
   end
@@ -15,6 +21,14 @@ class FatteningRabbit < Rabbit
 
   def list_item_text
     "ciao"
+  end
+
+  def compartment
+    self.container
+  end
+
+  def cage
+    self.container.try(:cage)
   end
 
 
