@@ -80,7 +80,7 @@ class Rabbit < ActiveRecord::Base
   end
 
   def position
-    "Gabbia #{self.cage.code}"
+    "#{self.cage.code}"
   end
 
   def kill death_date = Date.today

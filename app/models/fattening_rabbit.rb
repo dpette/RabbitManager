@@ -7,7 +7,7 @@ class FatteningRabbit < Rabbit
   end
 
   def position
-    "#{super}, cella #{self.compartment.code}"
+    "#{super} #{self.compartment.code}"
   end
 
 
