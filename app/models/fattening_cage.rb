@@ -27,11 +27,20 @@ class FatteningCage < Cage
   end
 
   def list_item_heading
-    "#{self.compartments.size} celle"
+    "#{self.compartments_size} celle, #{self.compartments.busy.size} occupate"
   end
 
   def list_item_text
-    "#{self.compartments.empty.size} celle libere"
+    heavier_rabbit = self.rabbits.includes(:weights).sort { |a, b| b.last_weight <=> a.last_weight  }.first
+    if heavier_rabbit
+      "Più pesante #{heavier_rabbit.last_weight} Kg"
+    else
+      ""
+    end
+  end
+
+  def rabbits
+    FatteningRabbit.where(container_id: self.compartments.pluck(:id))
   end
 
 

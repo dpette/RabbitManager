@@ -1,0 +1,2 @@
+module FatteningRabbitsHelper
+end

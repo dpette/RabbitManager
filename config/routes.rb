@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   resources :baby_rabbits
   resources :race_rabbits
   resources :weaning_rabbits
+  resources :fattening_rabbits
   resources :rabbits
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

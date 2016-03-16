@@ -1,0 +1,2 @@
+class FatteningRabbitsController < RabbitsController
+end
