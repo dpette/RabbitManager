@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :weaning_cages
   resources :cages do
     resources :mother_rabbits, only: [:new, :index]
+    resources :race_rabbits,   only: [:new, :index]
   end
   resources :fattening_cages
   resources :compartments

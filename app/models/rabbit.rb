@@ -8,6 +8,7 @@ class Rabbit < ActiveRecord::Base
 
   validates :gender,     inclusion: { in: ["male", "female", "unknown"] }, allow_nil: true
   validates :birth_date, presence: true
+  validate  :validate_cage
 
   # delegate :cage, to: :compartment, prefix: true
 #  delegate :value, to: :weights, prefix: true
@@ -36,9 +37,7 @@ class Rabbit < ActiveRecord::Base
     true
   end
 
-
   def self.accept_age? age
-    logger.info "age > self.min_age && age < self.max_age"
     logger.info "age > #{self.min_age} && age < #{self.max_age}"
     age > self.min_age && age < self.max_age
   end
@@ -47,7 +46,9 @@ class Rabbit < ActiveRecord::Base
     c_b_c = []
 
     [MotherRabbit, FatteningRabbit, RaceRabbit, BabyRabbit, WeaningRabbit].each do |rabbit_class|
+      puts "go fo #{rabbit_class}"
       if rabbit_class.accept_age?(self.age) && rabbit_class.accept_gender?(self.gender)
+        puts "YESS!"
         c_b_c << rabbit_class
       end
     end
@@ -118,6 +119,14 @@ class Rabbit < ActiveRecord::Base
     name
   end
 
+  def list_item_text
+    if self.last_weight.nil?
+      "Nessun peso registrato"
+    else
+      "#{last_weight} Kg #{self.weights.last.days_from_registration} giorni fa"
+    end
+  end
+
   def secondary_infos
     infos = {}
 
@@ -129,5 +138,23 @@ class Rabbit < ActiveRecord::Base
 
     infos
   end
+
+  protected
+    def set_name_by_cage
+      if self.name_changed? && self.cage.name != self.name
+        self.cage.update_attributes(name: self.name)
+      end
+
+      if self.container_id_changed? && self.container_id && self.cage.name != self.name
+        self.update_attributes(name: self.cage.name)
+      end
+    end
+
+    def validate_cage
+      if !cage.kind_of? self.class.allowed_cage_type
+        self.errors.add(:cage, "deve essere una #{self.class.allowed_cage_type.model_name.human}")
+      end
+    end
+
 
 end

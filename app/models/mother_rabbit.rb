@@ -5,7 +5,6 @@ class MotherRabbit < Rabbit
   has_many :pregnancies, :class_name => "Pregnancy", :foreign_key => "rabbit_id"#, dependent: :destroy
 
   after_initialize :set_gender
-  after_save :set_name_by_cage
 
   MIN_AGE = 120
 
@@ -52,7 +51,7 @@ class MotherRabbit < Rabbit
   end
 
   def self.allowed_cage_type
-    WeaningCage
+    MotherhoodCage
   end
 
 
@@ -70,14 +69,5 @@ class MotherRabbit < Rabbit
       self.gender = "female"
     end
 
-    def set_name_by_cage
-      if self.name_changed? && self.cage.name != self.name
-        self.cage.update_attributes(name: self.name)
-      end
-
-      if self.container_id_changed? && self.container_id && self.cage.name != self.name
-        self.update_attributes(name: self.cage.name)
-      end
-    end
 
 end

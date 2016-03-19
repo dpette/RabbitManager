@@ -21,12 +21,17 @@ class RabbitsController < ApplicationController
 
    # GET /rabbits/new
   def new
-    container_type = params[:container_type]
-    container_id   = params[:container_id]
-    @rabbit = @cage.rabbits.new(
+    if @cage
+      container_id   = @cage.id
+      container_type = "Cage"
+    else
+      container_id   = params[:container_id]
+      container_type = params[:container_type]
+    end
+    @rabbit = Rabbit.new(
       type: class_name_by_controller,
-      container_type: container_type,
-      container_id: container_id
+      container_id: container_id,
+      container_type: container_type
     )
   end
 
@@ -46,7 +51,7 @@ class RabbitsController < ApplicationController
         format.html { redirect_to cage_path(@rabbit.cage), notice: 'Coniglio creato con successo.' }
         format.json { render :show, status: :created, location: @rabbit }
       else
-        puts @rabbit.errors.full_messages
+        flash[:error] =  @rabbit.errors.full_messages.to_sentence
         format.html { render :new }
         format.json { render json: @rabbit.errors, status: :unprocessable_entity }
       end
@@ -85,39 +90,6 @@ class RabbitsController < ApplicationController
     end
   end
 
-  # def new_birth
-  # end
-
-  # def birth
-  #   size       = params[:size].to_i
-  #   birth_date = Date.new(params["birth_date(1i)"].to_i, params["birth_date(2i)"].to_i, params["birth_date(3i)"].to_i)
-  #   @rabbit.giving_birth size, birth_date
-
-  #   respond_to do |format|
-  #     format.html { redirect_to cage_path(@rabbit.cage)}
-  #   end
-  # end
-
-  # def new_conception
-  #   @conceptioners = RaceRabbit.where(container_id: current_user.farms.first.cages.pluck(:id))
-  # end
-
-  # def conception
-  #   conceptioner    = Rabbit.find_by(id: params[:conceptioner_id])
-  #   conceptioned_on = Date.new(params["conceptioned_on(1i)"].to_i, params["conceptioned_on(2i)"].to_i, params["conceptioned_on(3i)"].to_i)
-  #   logger.info { "conceptioned_on #{conceptioned_on}" }
-  #   @rabbit.make_conception conceptioner, conceptioned_on
-
-  #   respond_to do |format|
-  #     format.html { redirect_to rabbit_path(@rabbit)}
-  #   end
-  # end
-
-
-  def available_compartments
-  end
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rabbit
@@ -135,7 +107,7 @@ class RabbitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def rabbit_params
       params.require(class_instance_name_by_controller.to_sym).
-        permit(:name, :container_id, :container_type, :type, :gender, :notes, :birth_date, :death_date, :conceptioner_id, :conceptioned_on)
+        permit(:name, :container_id, :container_type, :type, :gender, :notes, :birth_date, :death_date)
     end
 
     def set_rabbit_type

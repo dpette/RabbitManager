@@ -51,7 +51,7 @@ class CagesController < ApplicationController
   def update
     respond_to do |format|
       if @cage.update(cage_params)
-        format.html { redirect_to @cage, notice: 'Cage was successfully updated.' }
+        format.html { redirect_to @cage, notice: 'La gabbia è stata aggiornata con successo' }
         format.json { render :show, status: :ok, location: @cage }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class CagesController < ApplicationController
   def destroy
     @cage.destroy
     respond_to do |format|
-      format.html { redirect_to cages_url, notice: 'Cage was successfully destroyed.' }
+      format.html { redirect_to cages_url, notice: 'La gabbia è stata distrutta con successo' }
       format.json { head :no_content }
     end
   end
@@ -140,6 +140,8 @@ class CagesController < ApplicationController
       @cage_type = class_instance_name_by_controller
     end
 
+  protected
+
     def set_available_cages rabbits
       rabbits = [rabbits] if rabbits.kind_of? Rabbit
       rabbits.each do |rabbit|
@@ -148,9 +150,12 @@ class CagesController < ApplicationController
 
           puts ("can_become_class => #{can_become_class}")
 
+          cages = can_become_class.allowed_cage_type.where(farm_id: @farm.id)
+          cages = cages.where.not(id: rabbit.container_id) if rabbit.container_type == "Cage"
+
           instance_variable_set(
             "@#{can_become_class.allowed_cage_type.model_name.plural}",
-            can_become_class.allowed_cage_type.where(farm_id: @farm.id).where.not(id: rabbit.cage.id)
+            cages
           )
         end
       end

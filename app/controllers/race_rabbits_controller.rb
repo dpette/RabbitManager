@@ -1,0 +1,2 @@
+class RaceRabbitsController < RabbitsController
+end

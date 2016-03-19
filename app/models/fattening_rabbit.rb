@@ -19,14 +19,6 @@ class FatteningRabbit < Rabbit
     "#{age} giorni"
   end
 
-  def list_item_text
-    if self.last_weight.nil?
-      "Nessun peso registrato"
-    else
-      "#{last_weight} Kg #{self.weights.last.days_from_registration} giorni fa"
-    end
-  end
-
   def compartment
     self.container
   end

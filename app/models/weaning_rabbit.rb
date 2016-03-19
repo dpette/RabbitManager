@@ -1,7 +1,7 @@
 class WeaningRabbit < Rabbit
 
   MIN_AGE = 25
-  MAX_AGE = 100
+  MAX_AGE = 120
 
   def self.min_age
     MIN_AGE
@@ -15,14 +15,14 @@ class WeaningRabbit < Rabbit
     WeaningCage
   end
 
-  def can_become_classes
-    c_b_c = [WeaningRabbit]
-    c_b_c << BabyRabbit      if self.age < 50
-    c_b_c << FatteningRabbit if self.age > 30
-    c_b_c << MotherRabbit    if self.gender == "female" && age > 50
+  # def can_become_classes
+  #   c_b_c = [WeaningRabbit]
+  #   c_b_c << BabyRabbit      if self.age < 50
+  #   c_b_c << FatteningRabbit if self.age > 30
+  #   c_b_c << MotherRabbit    if self.gender == "female" && age > 50
 
-    c_b_c
-  end
+  #   c_b_c
+  # end
 
 
   def self.min_age

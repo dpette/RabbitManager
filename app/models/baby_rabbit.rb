@@ -25,11 +25,11 @@ class BabyRabbit < Rabbit
     35
   end
 
-  private
-    def validate_cage
-      if !cage.kind_of? MotherhoodCage
-        self.errors.add(:cage, "deve essere una gabbia fattrice")
-      end
-    end
+  # private
+  #   def validate_cage
+  #     if !cage.kind_of? MotherhoodCage
+  #       self.errors.add(:cage, "deve essere una gabbia fattrice")
+  #     end
+  #   end
 
 end

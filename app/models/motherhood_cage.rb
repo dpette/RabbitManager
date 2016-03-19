@@ -28,7 +28,7 @@ class MotherhoodCage < Cage
   # end
 
 
-  def title
+  def list_item_heading
     if self.mother && self.mother.name.present?
       self.mother.name
     elsif self.mother.nil?

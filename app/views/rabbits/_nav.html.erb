@@ -1,5 +1,9 @@
 <% content_for :nav_left do  %>
-  <li><%= icon_link_to "arrow_back", cage_path(rabbit.cage) %></li>
+	<% if @rabbit.kind_of? RaceRabbit %>
+  	<li><%= icon_link_to "arrow_back", cages_path %></li>
+	<% else %>
+  	<li><%= icon_link_to "arrow_back", cage_path(rabbit.cage) %></li>
+	<% end %>
 <% end %>
 <% content_for :nav_right do  %>
   <li class="dropdown">
