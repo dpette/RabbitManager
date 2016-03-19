@@ -19,7 +19,6 @@ class FatteningCage < Cage
     elsif diff > 0
 
       ((compartments.size + 1)..(compartments.size + diff)).each do |c|
-        logger.info { "add compartment! #{c}" }
 
         self.compartments.new
       end

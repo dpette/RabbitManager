@@ -15,7 +15,13 @@ $nprogress-height: 3px;
 @import "rabbits";
 @import "compartments";
 
-body { padding-top: 70px; }
+body { 
+  padding-top: 70px;
+
+  & > .container {
+    margin-bottom: 50px;
+  }
+}
 
 .navbar, .navbar-default.navbar {
   background-color: $primary-color;

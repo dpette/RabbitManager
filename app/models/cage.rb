@@ -1,5 +1,7 @@
 class Cage < ActiveRecord::Base
 
+	default_scope { order(:code) }
+
   belongs_to :farm
 
   scope :fattening,  -> { where(type: "FatteningCage") }
