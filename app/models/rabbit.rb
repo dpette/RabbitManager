@@ -29,7 +29,7 @@ class Rabbit < ActiveRecord::Base
   end
 
   def self.max_age
-    MIN_AGE
+    MAX_AGE
   end
 
   def self.accept_gender? gender
@@ -38,6 +38,8 @@ class Rabbit < ActiveRecord::Base
 
 
   def self.accept_age? age
+    logger.info "age > self.min_age && age < self.max_age"
+    logger.info "age > #{self.min_age} && age < #{self.max_age}"
     age > self.min_age && age < self.max_age
   end
 
@@ -78,7 +80,7 @@ class Rabbit < ActiveRecord::Base
   end
 
   def position
-    "Gabbia #{self.cage.code}"
+    "#{self.cage.code}"
   end
 
   def kill death_date = Date.today
@@ -112,7 +114,7 @@ class Rabbit < ActiveRecord::Base
     ]
   end
 
-  def list_item_title
+  def list_item_heading
     name
   end
 

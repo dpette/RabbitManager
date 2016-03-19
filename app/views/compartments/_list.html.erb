@@ -5,18 +5,16 @@
       if compartment.rabbit
         path = rabbit_path(compartment.rabbit)
       else
-        path = "/#"
+        path = new_fattening_rabbit_path(container_id: compartment.id, container_type: "Compartment", cage_id: @cage.id)
       end
     %>
-    <%= link_to path, class: "list-group-item", disabled: compartment.rabbit.nil? do %>
+    <%= link_to path, class: "list-group-item" do %>
       <div class="row-action-primary row-action-gender-<%= compartment.rabbit.try(:gender) %>">
         <!-- <i class="material-icons"><%= compartment.code %></i> -->
         <i class="code"><%= compartment.code %></i>
       </div>
       <div class="row-content">
-        <% if  compartment.rabbit %>
-          <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
-        <% end %>
+        <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
         <!-- <div class="least-content">15m</div> -->
         <h4 class="list-group-item-heading"><%= compartment.list_item_heading %></h4>
 

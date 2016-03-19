@@ -21,7 +21,13 @@ class RabbitsController < ApplicationController
 
    # GET /rabbits/new
   def new
-    @rabbit = @cage.rabbits.new(type: class_name_by_controller)
+    container_type = params[:container_type]
+    container_id   = params[:container_id]
+    @rabbit = @cage.rabbits.new(
+      type: class_name_by_controller,
+      container_type: container_type,
+      container_id: container_id
+    )
   end
 
   # GET /rabbits/1/edit

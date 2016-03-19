@@ -32,7 +32,7 @@ class MotherhoodCage < Cage
     if self.mother && self.mother.name.present?
       self.mother.name
     elsif self.mother.nil?
-      "Senza madre"
+      self.name || "Senza madre"
     else
       super
     end
@@ -53,7 +53,6 @@ class MotherhoodCage < Cage
   def self.allowed_rabbit_class
     BabyRabbit
   end
-
 
 
 end
