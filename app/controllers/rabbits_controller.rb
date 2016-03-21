@@ -48,7 +48,7 @@ class RabbitsController < ApplicationController
 
     respond_to do |format|
       if @rabbit.save
-        format.html { redirect_to cage_path(@rabbit.cage), notice: 'Coniglio creato con successo.' }
+        format.html { redirect_to rabbit_path(@rabbit), notice: 'Coniglio creato con successo.' }
         format.json { render :show, status: :created, location: @rabbit }
       else
         flash[:error] =  @rabbit.errors.full_messages.to_sentence

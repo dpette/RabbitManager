@@ -21,6 +21,11 @@ class RaceRabbit < Rabbit
     120
   end
 
+  def self.allowed_cage_type
+    RaceCage
+  end
+
+
   private
   	def set_gender
   	  self.gender = "male"
