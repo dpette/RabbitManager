@@ -5,6 +5,7 @@ class Pregnancy < ActiveRecord::Base
   validates :starting_at, presence: true
   validates :rabbit_id, presence: true
 
+  validate :starting_before_ending
   validate :avoid_intersections
 
   belongs_to :rabbit
@@ -48,14 +49,20 @@ class Pregnancy < ActiveRecord::Base
       ((self.rabbits.size + 1)..(self.rabbits.size + diff)).each do |r|
         logger.info { "add baby rabbit! #{r}" }
 
-        self.rabbits.babies.new(
+        br = BabyRabbit.new(
           pregnancy_id: self.id,
           birth_date: self.ending_at,
           container_id: self.rabbit.container_id,
           container_type: self.rabbit.container_type
         )
+
+        self.rabbits << br
+
+        # self.rabbits.babies.new(
+        # )
       end
     end
+    puts "self.rabbits => #{self.rabbits.first}"
   end
 
   private
@@ -64,6 +71,14 @@ class Pregnancy < ActiveRecord::Base
       self.rabbits.update_all(birth_date: self.ending_at) if self.ending_at_changed?
     end
 
+    def starting_before_ending
+      if self.starting_at_changed? && self.starting_at > self.ending_at
+        self.errors.add(:starting_at, "deve essere prima della data di conclusione")
+      end
+      if self.ending_at_changed? && self.starting_at > self.ending_at
+        self.errors.add(:ending_at, "deve essere dopo data di inizio")
+      end
+    end
 
     def avoid_intersections
       pregnancies = self.rabbit.pregnancies.where.not(id: self.id)

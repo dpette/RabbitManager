@@ -151,6 +151,7 @@ class Rabbit < ActiveRecord::Base
     end
 
     def validate_cage
+      puts "self.class #{self.class}"
       if !cage.kind_of? self.class.allowed_cage_type
         self.errors.add(:cage, "deve essere una #{self.class.allowed_cage_type.model_name.human}")
       end
