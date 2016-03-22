@@ -72,10 +72,10 @@ class Pregnancy < ActiveRecord::Base
     end
 
     def starting_before_ending
-      if self.starting_at_changed? && self.starting_at > self.ending_at
+      if self.starting_at_changed? && self.ending_at && self.starting_at > self.ending_at
         self.errors.add(:starting_at, "deve essere prima della data di conclusione")
       end
-      if self.ending_at_changed? && self.starting_at > self.ending_at
+      if self.ending_at && self.ending_at_changed? && self.starting_at > self.ending_at
         self.errors.add(:ending_at, "deve essere dopo data di inizio")
       end
     end
