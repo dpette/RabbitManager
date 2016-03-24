@@ -21,12 +21,12 @@ class RabbitsController < ApplicationController
 
    # GET /rabbits/new
   def new
-    if @cage
-      container_id   = @cage.id
-      container_type = "Cage"
-    else
+    if params[:container_id].present? && params[:container_type].present?
       container_id   = params[:container_id]
       container_type = params[:container_type]
+    else
+      container_id   = @cage.id
+      container_type = "Cage"
     end
     @rabbit = Rabbit.new(
       type: class_name_by_controller,
@@ -44,6 +44,7 @@ class RabbitsController < ApplicationController
   # POST /rabbits.json
   def create
     @rabbit = Rabbit.new(rabbit_params)
+    puts @rabbit.to_yaml
     @cage   = @rabbit.cage
 
     respond_to do |format|
