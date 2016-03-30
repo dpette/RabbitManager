@@ -16,7 +16,7 @@ $nprogress-height: 3px;
 @import "rabbits";
 @import "compartments";
 
-body { 
+body {
   padding-top: 70px;
 
   @media (min-width: 1200px) {
@@ -440,4 +440,11 @@ small {
 
 a[disabled] {
   pointer-events: none;
+}
+
+a.anchor {
+  display: block;
+  position: relative;
+  top: -70px;
+  visibility: hidden;
 }
