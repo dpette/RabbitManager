@@ -1,24 +1,26 @@
-<h2><%= cages.model_name.human %> <small><%= pluralize(cages.size, 'gabbia', 'gabbie') %></small></h2>
+<div id="<%= cages.model_name.plural %>">
+  <h2><%= cages.model_name.human %> <small><%= pluralize(cages.size, 'gabbia', 'gabbie') %></small></h2>
 
-<%#= render "#{cages.model_name.route_key}/list", cages: cages %>
+  <%#= render "#{cages.model_name.route_key}/list", cages: cages %>
 
-<div class="list-group">
-  <% cages.each do |cage| %>
-    <%= link_to cage, class: "list-group-item" do %>
-      <div class="row-action-primary row-action-<%= cage.model_name.element %>">
-        <i class="cage"><%= cage.code %></i>
-      </div>
-      <div class="row-content">
-        <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
-        <!-- <div class="least-content">15m</div> -->
-        <h4 class="list-group-item-heading"><%= cage.list_item_heading %></h4>
+  <div class="list-group">
+    <% cages.each do |cage| %>
+      <%= link_to cage, class: "list-group-item" do %>
+        <div class="row-action-primary row-action-<%= cage.model_name.element %>">
+          <i class="cage"><%= cage.code %></i>
+        </div>
+        <div class="row-content">
+          <div class="action-secondary"><i class="material-icons">chevron_right</i></div>
+          <!-- <div class="least-content">15m</div> -->
+          <h4 class="list-group-item-heading"><%= cage.list_item_heading %></h4>
 
-        <p class="list-group-item-text"><%= cage.list_item_text %></p>
-      </div>
+          <p class="list-group-item-text"><%= cage.list_item_text %></p>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<div class="action-buttons">
-  <%= icon_link_to "add", send("new_#{cages.model_name.singular_route_key}_path"), class: "btn btn-primary btn-fab btn-raised btn-#{cages.model_name.element}" %>
+  <div class="action-buttons">
+    <%= icon_link_to "add", send("new_#{cages.model_name.singular_route_key}_path"), class: "btn btn-primary btn-fab btn-raised btn-#{cages.model_name.element}" %>
+  </div>
 </div>
