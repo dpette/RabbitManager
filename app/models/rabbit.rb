@@ -61,7 +61,7 @@ class Rabbit < ActiveRecord::Base
   end
 
   def last_weight
-    weights.last.try(:value)
+    weights.first.try(:value)
   end
 
   def cage
@@ -87,7 +87,8 @@ class Rabbit < ActiveRecord::Base
   def kill death_date = Date.today
     self.update_attributes(
       death_date: death_date || Date.today,
-      container: nil
+      container_id: nil,
+      container_type: nil
     )
   end
 
@@ -152,7 +153,7 @@ class Rabbit < ActiveRecord::Base
 
     def validate_cage
       puts "self.class #{self.class}"
-      if !cage.kind_of? self.class.allowed_cage_type
+      if cage && !cage.kind_of?(self.class.allowed_cage_type)
         self.errors.add(:cage, "deve essere una #{self.class.allowed_cage_type.model_name.human}")
       end
     end

@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   end
   resources :weaning_cages
   resources :cages do
-    resources :mother_rabbits, only: [:new, :index]
-    resources :race_rabbits,   only: [:new, :index]
+    resources :mother_rabbits,  only: [:new, :index]
+    resources :race_rabbits,    only: [:new, :index]
+    resources :weaning_rabbits, only: [:new, :index]
   end
   resources :fattening_cages
   resources :compartments
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
       get :edit_notes
     end
     collection do
+      get :multiple_kill
       resources :cages do
         collection do
           get :available_for_group

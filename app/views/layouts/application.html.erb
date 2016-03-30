@@ -53,6 +53,7 @@
 
 </div>
 
+<%= yield(:bottom_js) %>
 <script type="text/javascript">
   $(function(){
     $("meta[name=theme-color]").attr("content", "<%= color_by_cage @cage %>");

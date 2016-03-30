@@ -3,7 +3,7 @@ class RabbitsController < ApplicationController
 
 
   before_action :set_rabbit, only: [:show, :edit, :update, :destroy, :kill, :birth, :new_birth, :new_conception, :conception, :edit_notes, :available_cages, :move]
-  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception, :edit_notes, :available_cages, :move]
+  before_action :set_cage,   only: [:show, :edit, :new, :index, :kill, :destroy, :new_birth, :new_conception, :conception, :edit_notes, :available_cages, :move, :multiple_kill]
 
   before_filter :set_rabbit_type
 
@@ -88,6 +88,29 @@ class RabbitsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to cage_path(@cage), notice: "Registrata uccisione del coniglio"}
+    end
+  end
+
+  def multiple_kill
+    @rabbits = Rabbit.where(id: params[:rabbits_ids])
+    result   = true
+    error_at = 0
+
+    @rabbits.each_with_index do |rabbit, i|
+      error_at = i
+      result &&= rabbit.kill(Date.today)
+      puts "result => #{result}"
+    end
+
+    if result
+      respond_to do |format|
+        format.html { redirect_to cage_path(@cage), notice: "Morti registrate con successo"}
+      end
+    else
+      flash[:error] =  @rabbits[error_at].errors.full_messages.to_sentence
+      respond_to do |format|
+        format.html { redirect_to cage_path(@cage) }
+      end
     end
   end
 

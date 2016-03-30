@@ -60,7 +60,7 @@ class Cage < ActiveRecord::Base
     if self.rabbits.any?
       "Più vecchio: #{self.rabbits.order(:birth_date).first.age} giorni | Più giovane: #{self.rabbits.order(:birth_date).last.age}"
     else
-      "Non ci sono conigli in questa gabbia"
+      "Non ci sono conigli"
     end
   end
 

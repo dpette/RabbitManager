@@ -1,4 +1,6 @@
-<%= bootstrap_form_tag(url: available_for_group_cages_path, method: "GET") do %>
+<%= bootstrap_form_tag(url: "javascript:void(0)", method: "GET", html: { id: "multiselect" }) do %>
+  <%= hidden_field_tag :cage_id, cage.id %>
+
   <div class="list-group rabbits">
 
     <% rabbits.each_with_index do |rabbit, index| %>
@@ -38,5 +40,17 @@
       <% end %>
     <% end %>
   </div>
-  <%= submit_tag "Sposta", class: "btn btn-primary btn-raised btn-lg btn-block btn-multiselect" %>
+  <%= submit_tag "Sposta", class: "btn btn-primary btn-raised btn-lg btn-block btn-multiselect", data: { action: available_for_group_cages_path} %>
+  <%= submit_tag "Registra morte", class: "btn btn-primary btn-raised btn-lg btn-block btn-multiselect", data: { action: multiple_kill_rabbits_path } %>
+<% end %>
+
+<% content_for :bottom_js do %>
+  <script type="text/javascript">
+    $("#multiselect input[type='submit']").on("click", function(e){
+      e.preventDefault()
+      console.log("ciao" + $(this).data("action"))
+
+      $(this).closest("form").attr("action", $(this).data("action")).submit();
+    })
+  </script>
 <% end %>

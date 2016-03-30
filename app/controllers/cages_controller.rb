@@ -72,7 +72,10 @@ class CagesController < ApplicationController
 
   def available_for_group
     @rabbits = Rabbit.where(id: params[:rabbits_ids])
-    @cage    = @rabbits.first.cage
+    @cage    = Cage.find_by(id: params[:cage_id]) || @rabbits.first.cage
+
+    puts "@cage => #{@cage.id}"
+
     set_available_cages @rabbits
   end
 

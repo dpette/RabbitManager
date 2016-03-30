@@ -66,3 +66,4 @@
 <%= link_to "Pesa", new_rabbit_weight_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
 <%= link_to "Sposta", available_rabbit_cages_path(@rabbit), class: "btn btn-primary btn-block btn-lg" %>
 <%= link_to "Pronto", kill_rabbit_path(@rabbit), method: :put, class: "btn btn-primary btn-block btn-lg", data: { confirm: "I conigli non ritornano più in vita"} %>
+<%= link_to "Registra morte", kill_rabbit_path(@rabbit), method: :put, class: "btn btn-primary btn-block btn-lg", data: { confirm: "I conigli non ritornano più in vita"} %>

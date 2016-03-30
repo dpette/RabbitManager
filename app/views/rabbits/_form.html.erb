@@ -13,7 +13,7 @@ end
     <% elsif field == "name" %>
       <%= f.text_field field %>
     <% elsif field == "gender" %>
-      <%= f.select :gender, [["Sconosciuto", "unknown"], ["Maschio", "male"], ["Femmina", "female"]], prompt: "Scegli il sesso del coniglio" %>
+      <%= f.select :gender, [["Sconosciuto", "unknown"], ["Maschio", "male"], ["Femmina", "female"]] %>
     <% elsif field == "notes" %>
       <%= f.text_area :notes %>
     <% elsif field.in?(["container_type", "container_id", "type"]) %>
