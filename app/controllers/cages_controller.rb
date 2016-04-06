@@ -13,6 +13,7 @@ class CagesController < ApplicationController
     @motherhood_cages = MotherhoodCage.where(farm_id: @farm.id)
     @weaning_cages    = WeaningCage.where(farm_id: @farm.id)
     @race_cages       = RaceCage.where(farm_id: @farm.id)
+
   end
 
   # GET /cages/1

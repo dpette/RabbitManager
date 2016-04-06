@@ -312,6 +312,14 @@ body.race_cage {
 .list-group .list-group-item {
   padding: 0;
 
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+
   @media (min-width: 768px) {
     padding: 0 16px;
   }

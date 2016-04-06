@@ -30,11 +30,11 @@ class FatteningCage < Cage
   end
 
   def list_item_text
-    heavier_rabbit = self.rabbits.includes(:weights).sort { |a, b| b.last_weight.to_f <=> a.last_weight.to_f  }.first
-    if heavier_rabbit && heavier_rabbit.last_weight
-      "Più pesante #{heavier_rabbit.last_weight} Kg"
+    # heavier_rabbit = self.rabbits.includes(:weights).sort { |a, b| b.last_weight.to_f <=> a.last_weight.to_f  }.first
+    if self.rabbits.any?
+      "Più vecchio #{self.rabbits.order(:birth_date).first.age} giorni"
     else
-      "Nessun peso registrato"
+      "Nessun coniglio"
     end
   end
 
