@@ -56,6 +56,16 @@
     </div>
   </a>
   <div class="list-group-separator"></div>
+  <% if @rabbit.pregnancy.try(:mother) %>
+    <div class="list-group-item">
+      <div class="row-content">
+        <h4 class="list-group-item-heading">Madre</h4>
+        <p class="list-group-item-text notes"><%= @rabbit.pregnancy.mother.name %></p>
+        <!-- <div class="action-secondary"><i class="material-icons">chevron_right</i></div> -->
+      </div>
+    </div>
+    <div class="list-group-separator"></div>
+  <% end %>
 </div>
 
 <% if @rabbit.mother? %>
